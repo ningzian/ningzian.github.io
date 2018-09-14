@@ -103,7 +103,10 @@
 <meta property="og:description" content="本文是我搭建博客中学习到的一些知识。Hexo的官网说明文档讲解的非常齐全，我只按照我学习的顺序来介绍。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ningzian.com/2018/01/06/Tutorial_of_Hexo_and_Next/1.JPG">
-<meta property="og:updated_time" content="2018-09-14T13:07:09.967Z">
+<meta property="og:image" content="http://ningzian.com/2018/01/06/Tutorial_of_Hexo_and_Next/2.JPG">
+<meta property="og:image" content="http://ningzian.com/2018/01/06/Tutorial_of_Hexo_and_Next/4.JPG">
+<meta property="og:image" content="http://ningzian.com/2018/01/06/Tutorial_of_Hexo_and_Next/3.JPG">
+<meta property="og:updated_time" content="2018-09-14T14:04:48.234Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo 和 NexT教程（更新）">
 <meta name="twitter:description" content="本文是我搭建博客中学习到的一些知识。Hexo的官网说明文档讲解的非常齐全，我只按照我学习的顺序来介绍。">
@@ -404,7 +407,7 @@
 <p>按照GitHub上的NexT项目的 <code>README</code> 文档的步骤，就可以安装好了。<br>NexT官方网址为：<a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">http://theme-next.iissnan.com/</a></p>
 <h2 id="首页显示摘要"><a href="#首页显示摘要" class="headerlink" title="首页显示摘要"></a>首页显示摘要</h2><p>在 NexT 的设置文件里做如下更改：<br><img src="/2018/01/06/Tutorial_of_Hexo_and_Next/1.JPG" alt=""></p>
 <p>在文章中添加一行 <code>&lt;!-- more --&gt;</code> 进行截断， <code>&lt;!-- more --&gt;</code> 以上的都是摘要，都是可以显示在主页中的。如果没有截断，就按默认150.</p>
-<h2 id="删除文章"><a href="#删除文章" class="headerlink" title="删除文章"></a>删除文章</h2><p>删除文章的过程一样也很简单，先删除本地文件，然后通过生成和部署命令进而将远程仓库中的文件也一并删除。<br>首先进入到source/_post 文件夹中，找到需要删除的.md文件，在本地直接执行删除，同时需要删除文章附带的图片文件。然后依次执行hexo g，hexo d，再去主页查看你就会发现你的博客上面已经空空如也了，这就是如何删除文章的方法。</p>
+<h2 id="删除文章"><a href="#删除文章" class="headerlink" title="删除文章"></a>删除文章</h2><p>删除文章的过程一样也很简单，先删除本地文件，然后通过生成和部署命令进而将远程仓库中的文件也一并删除。<br>首先进入到 <code>source/_post</code> 文件夹中，找到需要删除的.md文件，在本地直接执行删除，同时需要删除文章附带的图片文件。然后依次执行hexo g，hexo d，再去主页查看你就会发现你的博客上面已经空空如也了，这就是如何删除文章的方法。</p>
 <h2 id="附件文件夹管理"><a href="#附件文件夹管理" class="headerlink" title="附件文件夹管理"></a>附件文件夹管理</h2><p>参考博客：<a href="https://www.jianshu.com/p/c2ba9533088a" target="_blank" rel="noopener">https://www.jianshu.com/p/c2ba9533088a</a></p>
 <ol>
 <li>首先确认_config.yml 中有 post_asset_folder:true。<br>Hexo 提供了一种更方便管理 Asset 的设定：post_asset_folder<br>当您设置post_asset_folder为true参数后，在建立文件时，Hexo<br>会自动建立一个与文章同名的文件夹，您可以把与该文章相关的所有资源都放到那个文件夹，如此一来，您便可以更方便的使用资源。<ol>
@@ -423,7 +426,10 @@
 <pre><code>{% asset_path slug %}
 {% asset_img slug [title] %}
 {% asset_link slug [title] %}
-</code></pre>
+</code></pre><h2 id="部署的时候要求输入用户名和密码的问题"><a href="#部署的时候要求输入用户名和密码的问题" class="headerlink" title="部署的时候要求输入用户名和密码的问题"></a>部署的时候要求输入用户名和密码的问题</h2><p>每次部署 <code>hexo deploy</code> 都需要输入用户名和密码<br><img src="/2018/01/06/Tutorial_of_Hexo_and_Next/2.JPG" alt=""></p>
+<p>原因是设置文件中，没有按照 <code>git@github.com</code> 的格式来写。<br><img src="/2018/01/06/Tutorial_of_Hexo_and_Next/4.JPG" alt=""><br>而是 <code>https://github.com</code><br><img src="/2018/01/06/Tutorial_of_Hexo_and_Next/3.JPG" alt=""></p>
+<p>改正后再部署就不用输入密码了。</p>
+
       
     </div>
     
@@ -661,7 +667,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-NexT-主题"><span class="nav-number">1.</span> <span class="nav-text">安装 NexT 主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#首页显示摘要"><span class="nav-number">2.</span> <span class="nav-text">首页显示摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除文章"><span class="nav-number">3.</span> <span class="nav-text">删除文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附件文件夹管理"><span class="nav-number">4.</span> <span class="nav-text">附件文件夹管理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-NexT-主题"><span class="nav-number">1.</span> <span class="nav-text">安装 NexT 主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#首页显示摘要"><span class="nav-number">2.</span> <span class="nav-text">首页显示摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除文章"><span class="nav-number">3.</span> <span class="nav-text">删除文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附件文件夹管理"><span class="nav-number">4.</span> <span class="nav-text">附件文件夹管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署的时候要求输入用户名和密码的问题"><span class="nav-number">5.</span> <span class="nav-text">部署的时候要求输入用户名和密码的问题</span></a></li></ol></div>
             
 
           </div>
