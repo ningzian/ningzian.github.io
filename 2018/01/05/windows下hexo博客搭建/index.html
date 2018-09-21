@@ -457,7 +457,7 @@
 <p><img src="/2018/01/05/windows下hexo博客搭建/git_install_4.JPG" alt=""></p>
 <p>安装好之后，可以通过 <code>git --version</code> 来测试git是否安装成功。<br><img src="/2018/01/05/windows下hexo博客搭建/git.JPG" alt=""></p>
 <h3 id="右键添加Git-Bash-Here"><a href="#右键添加Git-Bash-Here" class="headerlink" title="右键添加Git Bash Here"></a>右键添加<code>Git Bash Here</code></h3><p>一般情况下，安装完git，右键会自动出现 <code>Git Bash Here</code> 选项，如下图所示<br><img src="/2018/01/05/windows下hexo博客搭建/git_install_5.JPG" alt=""></p>
-<p>如果由于系统更新等原因，导致右键选项消失，可以手动添加，过程如下：<br>运行 <code>regedit.exe</code> 进入注册表，在 <code>HKEY_CLASSES_ROOT\Directory\Background\shell</code>中进行设置。<br>1.新建项Git Bush Here，此时你可以看到在桌面右键会出现“Git Bush Here”菜单。<br>2.添加Git Bush Icon，在第一步的新建项Git Bush Here下，新建字符串值Icon，然后编辑该值为“C:\Program Files\Git\mingw64\share\git\git-for-windows.ico”，你需要根据你安装的Git 目录进行配置修改。完成此步后，你会发现右键菜单“Git Bush Here”会多出一个Icon。<br><img src="/2018/01/05/windows下hexo博客搭建/git_install_6.JPG" alt=""><br>3.添加Command项。在“Git Bush Here”下再新建项“Command”，将其默认值改为“C:\Program Files\Git\bin\bash.exe –login -i”，这样，你就可以通过右键菜单的方式快速进入Git命令行工具，进行代码版本管理。<br><img src="/2018/01/05/windows下hexo博客搭建/git_install_7.JPG" alt=""></p>
+<p>如果由于系统更新等原因，导致右键选项消失，可以手动添加，过程如下：<br>运行 <code>regedit.exe</code> 进入注册表，在 <code>HKEY_CLASSES_ROOT\Directory\Background\shell</code>中进行设置。<br>1.新建项Git Bush Here，此时你可以看到在桌面右键会出现“Git Bush Here”菜单。<br>2.添加Git Bush Icon，在第一步的新建项Git Bush Here下，新建字符串值Icon，然后编辑该值为“C:\Program Files\Git\mingw64\share\git\git-for-windows.ico”，你需要根据你安装的Git 目录进行配置修改。完成此步后，你会发现右键菜单“Git Bush Here”会多出一个Icon。<br><img src="/2018/01/05/windows下hexo博客搭建/git_install_6.JPG" alt=""><br>3.添加Command项。在“Git Bush Here”下再新建项“Command”，将其默认值改为“C:\Program Files\Git\bin\bash.exe —login -i”，这样，你就可以通过右键菜单的方式快速进入Git命令行工具，进行代码版本管理。<br><img src="/2018/01/05/windows下hexo博客搭建/git_install_7.JPG" alt=""></p>
 <h3 id="使用github"><a href="#使用github" class="headerlink" title="使用github"></a>使用github</h3><p>在<a href="https://github.com/" target="_blank" rel="noopener">GitHub官网</a>注册账号。然后要添加SSH Key，这样Github就能识别设备,允许电脑直接提交代码。</p>
 <p>打开刚刚安装好的git，输入命令</p>
 <blockquote>
@@ -505,7 +505,7 @@
 <h3 id="将本地hexo博客托管到GitHub上"><a href="#将本地hexo博客托管到GitHub上" class="headerlink" title="将本地hexo博客托管到GitHub上"></a>将本地hexo博客托管到GitHub上</h3><p>hexo的配置文件为目录下的 <code>_config.yml</code> ，修改此文件即可更改设置。编辑最后面的deploy属性。<br><img src="/2018/01/05/windows下hexo博客搭建/deploy_1.JPG" alt=""></p>
 <p>输入命令，安装 <code>hexo-deployer-git</code> 插件</p>
 <blockquote>
-<p>npm install hexo-deployer-git –save</p>
+<p>npm install hexo-deployer-git —save</p>
 </blockquote>
 <p><img src="/2018/01/05/windows下hexo博客搭建/deploy_2.JPG" alt=""></p>
 <p>使用命令部署本地博客到github上。<br>代码如下，每次修改本地博客，都需要执行以下代码。</p>
@@ -959,6 +959,8 @@ hexo deploy      #简写 hexo d
   
 
   
+  
+
 
   
 

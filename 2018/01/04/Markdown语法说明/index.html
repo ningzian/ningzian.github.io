@@ -501,7 +501,7 @@ This is an H2
 
 **double asterisks**
 </code></pre><p>如果<code>*</code>和<code>_</code>两边都有空白的话，他们就只会被当成普通的符号。</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>如果要标记一小段行内代码，你可以用反引号 (<code>`</code>) 把它包起来。也可以使用多个反引号来开启和结束代码区段。代码区段的开始和结束都可以放入一个空白。在代码区段内，<code>&amp;</code>和方括号都会自动转换成HTML实体。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>如果要标记一小段行内代码，你可以用反引号 (<code>` </code>) 把它包起来。也可以使用多个反引号来开启和结束代码区段。代码区段的开始和结束都可以放入一个空白。在代码区段内，<code>&amp;</code>和方括号都会自动转换成HTML实体。</p>
 <h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>使用和链接很相似的语法来标记图片，同样允许使用两种样式：行内式和参考式。</p>
 <p>行内式：</p>
 <pre><code>![图片1](/path/img.jpg &quot;Optional title&quot;)
@@ -527,8 +527,8 @@ _  底线
 !  惊叹号
 </code></pre><h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p>使用Latex的语法写公式，下面介绍一些公式的写法。<br>参考博客：<a href="https://blog.csdn.net/u014630987/article/details/70156489" target="_blank" rel="noopener">https://blog.csdn.net/u014630987/article/details/70156489</a></p>
 <h3 id="添加公式的方法"><a href="#添加公式的方法" class="headerlink" title="添加公式的方法"></a>添加公式的方法</h3><ol>
-<li>行内式，用<code>\</code>或者 <code>$</code> 包裹公式<br><code>$行内公式$</code></li>
-<li>行间式<br><code>$$行内公式$$</code></li>
+<li>行内式，用<code>\</code>或者 <code>$</code> 包裹公式<br><code>$$行内公式$$</code></li>
+<li>行间式<br><code>$$$行内公式$$$</code></li>
 <li>以下几个字符: # $ % &amp; ~ _ ^ \ { }有特殊意义，需要表示这些字符时，需要转义，即在每个字符前加上<code>.</code>。<h3 id="希腊字母表"><a href="#希腊字母表" class="headerlink" title="希腊字母表"></a>希腊字母表</h3><img src="/2018/01/04/Markdown语法说明/1.png" alt=""><h3 id="角标（上下标）"><a href="#角标（上下标）" class="headerlink" title="角标（上下标）"></a>角标（上下标）</h3></li>
 <li><p>上标命令 <code>^{}</code></p>
 </li>
@@ -538,8 +538,7 @@ _  底线
 <p>上下标命令用来放在需要插入上下标的地方，大括弧内为上下标的内容，当角标为单个字符时候，可以不使用大括号；如果角标为多字符或者多层次的时候，必须要使用大括号。</p>
 <ol>
 <li><p>举例</p>
-<p>|代码|显示|<br>|:-:|:-:|<br>| <code>x^2</code> | $x^2$ |<br>|<code>x_1^2</code>|$x<em>1^2$|<br>|`x^{(n)}</em>{22}<code>|$x^{(n)}_{22}$|
-|</code>x^{2-y}<em>{32}` |$x^{2-y}</em>{32}$|<br>| <code>x^{y^{z^a}}</code> |$x^{y^{z^a}}$|<br>|<code>x^{y_z}</code>|$x^{y_z}$|</p>
+<p>|代码|显示|<br>|:-:|:-:|<br>| <code>x^2</code> | $x^2$ |<br>|<code>x_1^2</code>|$x_1^2$|<br>|<code>x^{(n)}_{22}</code>|$x^{(n)}_{22}$|<br>| <code>x^{2-y}_{32}</code> |$x^{2-y}_{32}$|<br>| <code>x^{y^{z^a}}</code> |$x^{y^{z^a}}$|<br>|<code>x^{y_z}</code>|$x^{y_z}$|</p>
 </li>
 </ol>
 <p>如果需要使用文字作为角标，首先要把文字放在<code>\mbox{}</code>文字模式中，另外要加上改变文字大小的命令。</p>
@@ -969,6 +968,8 @@ _  底线
   
 
   
+  
+
 
   
 

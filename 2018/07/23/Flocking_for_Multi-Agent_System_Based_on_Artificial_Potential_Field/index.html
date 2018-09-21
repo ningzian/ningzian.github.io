@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="世界无界，心圆则圆">
 <meta property="og:description" content="This is my research on multi-agent during my graduate study. The paper downloaded from IEEE is:Olfati-Saber R. Flocking for multi-agent dynamic systems: algorithms and theory[J]. IEEE Transactions on">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-21T08:45:37.522Z">
+<meta property="og:updated_time" content="2018-09-21T15:21:28.584Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于人工势场的多智能体聚结算法（论文）">
 <meta name="twitter:description" content="This is my research on multi-agent during my graduate study. The paper downloaded from IEEE is:Olfati-Saber R. Flocking for multi-agent dynamic systems: algorithms and theory[J]. IEEE Transactions on">
@@ -395,9 +395,9 @@
         <p>This is my research on multi-agent during my graduate study. The paper downloaded from IEEE is:<br>Olfati-Saber R. Flocking for multi-agent dynamic systems: algorithms and theory[J]. IEEE Transactions on Automatic Control, 2006, 51(3):401-420.</p>
 <a id="more"></a>
 <h2 id="Topology-of-Flocks-Proximity-Nets"><a href="#Topology-of-Flocks-Proximity-Nets" class="headerlink" title="Topology of Flocks: Proximity Nets"></a>Topology of Flocks: Proximity Nets</h2><p>The set of <em>neighbors</em> of node <em>i</em> is defined by</p>
-<p>$ N<em>i = { j\in V : a</em>{ij} \neq 0 } = {j\in V : (i,j)\in \varepsilon } $</p>
+<p>$ N_i = \{ j\in V : a_{ij} \neq 0 \} = \{j\in V : (i,j)\in \varepsilon \} $</p>
 <p>the set of <em>spatial neighbors</em> of agent <em>i</em> that is denoted by</p>
-<p>$ N_i = { j\in V : | q_j-q_i|&lt;r } $</p>
+<p>$ N_i = \{ j\in V : | q_j-q_i|&lt;r \} $</p>
 
       
     </div>
@@ -839,6 +839,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
