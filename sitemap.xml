@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://ningzian.com/2018/07/23/Flocking_for_Multi-Agent_System_Based_on_Artificial_Potential_Field/</loc>
+    <loc>http://ningzian.com/2018/09/21/PID%E7%AE%97%E6%B3%95/</loc>
     
-    <lastmod>2018-09-21T15:21:28.584Z</lastmod>
+    <lastmod>2018-09-22T15:24:53.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://ningzian.com/2018/09/21/PID%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://ningzian.com/2018/09/22/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98/</loc>
     
-    <lastmod>2018-09-21T14:17:51.354Z</lastmod>
+    <lastmod>2018-09-22T15:24:53.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ningzian.com/2018/09/22/MPC%E7%AE%97%E6%B3%95/</loc>
+    
+    <lastmod>2018-09-22T15:24:53.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ningzian.com/2018/07/23/Flocking_for_Multi-Agent_System_Based_on_Artificial_Potential_Field/</loc>
+    
+    <lastmod>2018-09-21T15:21:28.584Z</lastmod>
     
   </url>
   

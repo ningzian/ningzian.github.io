@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="学了这么多年的PID，一直都没有系统的总结总结。这次写一个详细点的总结。">
+<meta name="description" content="学了这么多年的PID，总结一下，准备面试。">
 <meta name="keywords" content="算法,控制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PID算法">
 <meta property="og:url" content="http://ningzian.com/2018/09/21/PID算法/index.html">
 <meta property="og:site_name" content="世界无界，心圆则圆">
-<meta property="og:description" content="学了这么多年的PID，一直都没有系统的总结总结。这次写一个详细点的总结。">
+<meta property="og:description" content="学了这么多年的PID，总结一下，准备面试。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-21T14:17:51.354Z">
+<meta property="og:updated_time" content="2018-09-22T15:24:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PID算法">
-<meta name="twitter:description" content="学了这么多年的PID，一直都没有系统的总结总结。这次写一个详细点的总结。">
+<meta name="twitter:description" content="学了这么多年的PID，总结一下，准备面试。">
 
 
 
@@ -392,8 +392,15 @@
       
 
       
-        <p>学了这么多年的PID，一直都没有系统的总结总结。这次写一个详细点的总结。<br><a id="more"></a></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2>
+        <p>学了这么多年的PID，总结一下，准备面试。<br><a id="more"></a></p>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><script type="math/tex; mode=display">
+ u(t)=K_p e(t) + K_i \int_0^te(t)dt + K_d \frac{de(t)}{dt}</script><h2 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h2><p><a href="https://wenku.baidu.com/view/3ff4d807ba1aa8114431d928.html" target="_blank" rel="noopener">https://wenku.baidu.com/view/3ff4d807ba1aa8114431d928.html</a></p>
+<ol>
+<li><strong>比例环节</strong> 的作用是对偏差瞬间做出快速相应。偏差一旦产生，控制器立即产生控制作用，使控制量向偏差的方向变化。过大的$K_p$会导致系统震荡，破坏系统的稳定性。</li>
+<li><strong>积分环节</strong> 的作用是把偏差的积累作为输出。在控制过程中，只要偏差存在，积分环节的输出就会不断增大，直到偏差为零，输出的 $u(t)$才可能维持在某一常量。<br>积分环节的调节作用虽然会消除静态误差，但也会降低系统的响应速度，增加系统的超调量。减小$K_i$会减慢静态误差的消除过程，但可以减少超调量，提高系统的稳定性。</li>
+<li><strong>微分环节</strong> 的作用是阻止偏差的变化。它根据偏差的变化趋势进行控制。偏差变化得越快，微分控制器的输出越大，并能在偏差值变大之前进行修正。<br>微分作用的引入，将有助于减少超调量，客服震荡，使系统趋于稳定。但微分的作用对输入信号的噪声很敏感，对那些噪声大的系统一般不用微分，或在微分起作用之前先对输入信号进行滤波。</li>
+</ol>
+<h2 id="数字化"><a href="#数字化" class="headerlink" title="数字化"></a>数字化</h2><h2 id="MATLAB代码实现"><a href="#MATLAB代码实现" class="headerlink" title="MATLAB代码实现"></a>MATLAB代码实现</h2><h2 id="C-代码实现"><a href="#C-代码实现" class="headerlink" title="C++代码实现"></a>C++代码实现</h2>
       
     </div>
     
@@ -463,6 +470,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/22/最小二乘/" rel="prev" title="最小二乘">
+                最小二乘 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -539,7 +550,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -550,7 +561,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -561,7 +572,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -625,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式"><span class="nav-number">1.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#意义"><span class="nav-number">2.</span> <span class="nav-text">意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字化"><span class="nav-number">3.</span> <span class="nav-text">数字化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MATLAB代码实现"><span class="nav-number">4.</span> <span class="nav-text">MATLAB代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-代码实现"><span class="nav-number">5.</span> <span class="nav-text">C++代码实现</span></a></li></ol></div>
             
 
           </div>
@@ -818,6 +829,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
