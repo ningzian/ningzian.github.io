@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="算法,控制," />
 
 
 
@@ -94,16 +94,18 @@
 
 
 
-<meta name="description" content="自律是快乐的根源！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="世界无界，心圆则圆">
-<meta property="og:url" content="http://ningzian.com/tags/雅思/index.html">
+<meta name="description" content="学了这么多年的PID，总结一下，准备面试。">
+<meta name="keywords" content="算法,控制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PID算法">
+<meta property="og:url" content="http://ningzian.com/2018/09/27/算法-控制-PID算法/index.html">
 <meta property="og:site_name" content="世界无界，心圆则圆">
-<meta property="og:description" content="自律是快乐的根源！">
+<meta property="og:description" content="学了这么多年的PID，总结一下，准备面试。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-27T05:45:30.387Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="世界无界，心圆则圆">
-<meta name="twitter:description" content="自律是快乐的根源！">
+<meta name="twitter:title" content="PID算法">
+<meta name="twitter:description" content="学了这么多年的PID，总结一下，准备面试。">
 
 
 
@@ -132,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://ningzian.com/tags/雅思/"/>
+  <link rel="canonical" href="http://ningzian.com/2018/09/27/算法-控制-PID算法/"/>
 
 
 
 
 
-  <title>标签: 雅思 | 世界无界，心圆则圆</title>
+  <title>PID算法 | 世界无界，心圆则圆</title>
   
 
 
@@ -173,7 +175,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -287,54 +289,212 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>雅思<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ningzian.com/2018/09/27/算法-控制-PID算法/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="宁子安">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="世界无界，心圆则圆">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/09/14/经验-考试-雅思复习总结/" itemprop="url">
-              
-                <span itemprop="name">雅思复习总结</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">PID算法</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-14T16:34:03+08:00"
-              content="2018-09-14" >
-          09-14
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-27T13:45:53+08:00">
+                2018-09-27
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法-控制/" itemprop="url" rel="index">
+                    <span itemprop="name">算法-控制</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    </div>
+      
 
+      
+        <p>学了这么多年的PID，总结一下，准备面试。<br><a id="more"></a></p>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><script type="math/tex; mode=display">
+ u(t)=K_p e(t) + K_i \int_0^te(t)dt + K_d \frac{de(t)}{dt}</script><h2 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h2><p><a href="https://wenku.baidu.com/view/3ff4d807ba1aa8114431d928.html" target="_blank" rel="noopener">https://wenku.baidu.com/view/3ff4d807ba1aa8114431d928.html</a></p>
+<ol>
+<li><strong>比例环节</strong> 的作用是对偏差瞬间做出快速相应。偏差一旦产生，控制器立即产生控制作用，使控制量向偏差的方向变化。过大的$K_p$会导致系统震荡，破坏系统的稳定性。</li>
+<li><strong>积分环节</strong> 的作用是把偏差的积累作为输出。在控制过程中，只要偏差存在，积分环节的输出就会不断增大，直到偏差为零，输出的 $u(t)$才可能维持在某一常量。<br>积分环节的调节作用虽然会消除静态误差，但也会降低系统的响应速度，增加系统的超调量。减小$K_i$会减慢静态误差的消除过程，但可以减少超调量，提高系统的稳定性。</li>
+<li><strong>微分环节</strong> 的作用是阻止偏差的变化。它根据偏差的变化趋势进行控制。偏差变化得越快，微分控制器的输出越大，并能在偏差值变大之前进行修正。<br>微分作用的引入，将有助于减少超调量，客服震荡，使系统趋于稳定。但微分的作用对输入信号的噪声很敏感，对那些噪声大的系统一般不用微分，或在微分起作用之前先对输入信号进行滤波。</li>
+</ol>
+<h2 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h2><p>计算机控制是一种采样控制，它只能根据采样许可的偏差计算控制量，而不能像模拟控制那样连续输出控制量，进行连续控制，所以公式中的积分和微分项不能直接使用，必须进行离散化处理。通常依据控制器输出与执行机构的对应关系，将基本数字PID算法分为<strong>位置式PID</strong>和<strong>增量式PID</strong>两种。</p>
+<h3 id="位置型PID"><a href="#位置型PID" class="headerlink" title="位置型PID"></a>位置型PID</h3><script type="math/tex; mode=display">
+u(k)=K_pe(k) + K_i\sum_{j=0}^{k}{Te(j)} + K_d\frac{e(k)-e(k-1)}{T}</script><p>位置PID结构简单，但是由于有积分项，容易产生积分饱和的现象，而且它每次输出的都是全量，此全量均和过去的输出有关，易产生累计误差。需要对其进行改进，由此产生的改进型PID控制器——增量型PID控制器。其区别在于，控制器输出的不是全量，而只是增量，每次输出均与过去的所有状态无关，而且它没有积分项，运算量小，容易实现手动到自动的无冲击切换。</p>
+<h3 id="增量型PID"><a href="#增量型PID" class="headerlink" title="增量型PID"></a>增量型PID</h3><script type="math/tex; mode=display">
+\Delta u=u(k)-u(k-1)
+=K_p(e(k)-e(k-1))+K_ie(k)+K_d\frac{e(k)-2e(k-1)+e(k-2)}{T}</script><h2 id="MATLAB代码实现"><a href="#MATLAB代码实现" class="headerlink" title="MATLAB代码实现"></a>MATLAB代码实现</h2><h2 id="C-代码实现"><a href="#C-代码实现" class="headerlink" title="C++代码实现"></a>C++代码实现</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="宁子安 WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="宁子安 Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/控制/" rel="tag"># 控制</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/27/编程-Hexo-Hexo教程3-渲染MathJax数学公式/" rel="next" title="Hexo教程3：渲染MathJax数学公式">
+                <i class="fa fa-chevron-left"></i> Hexo教程3：渲染MathJax数学公式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -342,6 +502,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -362,8 +526,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.JPG"
@@ -454,6 +627,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式"><span class="nav-number">1.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#意义"><span class="nav-number">2.</span> <span class="nav-text">意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#离散化"><span class="nav-number">3.</span> <span class="nav-text">离散化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#位置型PID"><span class="nav-number">3.1.</span> <span class="nav-text">位置型PID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增量型PID"><span class="nav-number">3.2.</span> <span class="nav-text">增量型PID</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MATLAB代码实现"><span class="nav-number">4.</span> <span class="nav-text">MATLAB代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-代码实现"><span class="nav-number">5.</span> <span class="nav-text">C++代码实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -574,10 +763,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
