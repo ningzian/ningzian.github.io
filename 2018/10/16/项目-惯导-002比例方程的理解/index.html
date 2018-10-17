@@ -112,7 +112,7 @@
 <meta property="og:site_name" content="世界无界，心圆则圆">
 <meta property="og:description" content="搞懂了哥氏定理之后，理解比例方程就非常简单了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-16T03:46:30.424Z">
+<meta property="og:updated_time" content="2018-10-16T04:11:02.043Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="002对比例方程的理解">
 <meta name="twitter:description" content="搞懂了哥氏定理之后，理解比例方程就非常简单了。">
@@ -433,9 +433,15 @@
 <li>地球坐标系上看（惯性坐标系力学编排）<br>这个比较简单，直接写出结果：<script type="math/tex; mode=display">
 \dot{V}_e^i=f^i+g^i-\omega_{ie}^i\times V_e^i-\omega_{ie}^i\times(\omega_{ie}^i\times R^i)</script></li>
 <li>平台坐标系上看（地理导航坐标系力学编排）<br>这部分的推导略微复杂，涉及到两个动系，推导的时候一定要看清楚，具体参考《惯性导航》-秦永元，7.4，224-225页<script type="math/tex; mode=display">
-\frac{dV_{eT}}{dt}|_T=f-(2\omega_{ie}+\omega_{eT})\times V_{eT}+G-\omega_{ie}\times(\omega_{ie}\times R)</script>其中，$V_{eT}$为在地球上看到的飞机速度。</li>
+\frac{dV_{eT}}{dt}|_T=f-(2\omega_{ie}+\omega_{eT})\times V_{eT}+G-\omega_{ie}\times(\omega_{ie}\times R)</script>其中，$V_{eT}$为在地球上看到的飞机速度，$R$是地心到平台坐标系T的支点的向量。<br>因为$G=g+a_c$，而$a_c=\omega_{ie}\times(\omega_{ie}\times R)$<br>所以<script type="math/tex; mode=display">
+\frac{dV_{eT}}{dt}|_T=f-(2\omega_{ie}+\omega_{eT})\times V_{eT}+g</script></li>
 </ol>
-<p>参考文献：<br>论文：基于伪距、伪距率组合导航技术研究-李靖松，2.4节<br>书：惯性导航-秦永元，7.4节</p>
+<p>参考文献：</p>
+<ol>
+<li><a href="https://blog.csdn.net/Pro2015/article/details/82347816?utm_source=blogxgwz0" target="_blank" rel="noopener">https://blog.csdn.net/Pro2015/article/details/82347816?utm_source=blogxgwz0</a></li>
+<li>论文：基于伪距、伪距率组合导航技术研究-李靖松，2.4节</li>
+<li>书：惯性导航-秦永元，7.4节</li>
+</ol>
 
       
     </div>
@@ -509,6 +515,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/10/17/项目-惯导-003卡尔曼滤波的理解/" rel="prev" title="对卡尔曼滤波的理解">
+                对卡尔曼滤波的理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -575,7 +585,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -597,7 +607,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
