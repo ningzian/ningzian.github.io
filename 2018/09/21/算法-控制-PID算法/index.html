@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法,控制,PID," />
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="学了这么多年的PID，总结一下，准备面试。">
+<meta name="keywords" content="算法,控制,PID">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PID算法">
+<meta property="og:url" content="http://ningzian.com/2018/09/21/算法-控制-PID算法/index.html">
+<meta property="og:site_name" content="世界无界，心圆则圆">
+<meta property="og:description" content="学了这么多年的PID，总结一下，准备面试。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ningzian.com/2018/09/21/算法-控制-PID算法/1.JPG">
+<meta property="og:image" content="http://ningzian.com/2018/09/21/算法-控制-PID算法/2.JPG">
+<meta property="og:updated_time" content="2018-09-30T01:32:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PID算法">
+<meta name="twitter:description" content="学了这么多年的PID，总结一下，准备面试。">
+<meta name="twitter:image" content="http://ningzian.com/2018/09/21/算法-控制-PID算法/1.JPG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ningzian.com/2018/09/21/算法-控制-PID算法/"/>
+
+
+
+
+
+  <title>PID算法 | 世界无界，心圆则圆</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b8faf3c5926c504b6da881fd8a73aeb6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">世界无界，心圆则圆</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ningzian.com/2018/09/21/算法-控制-PID算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="宁子安">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="世界无界，心圆则圆">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PID算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T15:12:53+08:00">
+                2018-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法-控制/" itemprop="url" rel="index">
+                    <span itemprop="name">算法-控制</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学了这么多年的PID，总结一下，准备面试。<br><a id="more"></a></p>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><script type="math/tex; mode=display">
+ u(t)=K_p e(t) + K_i \int_0^te(t)dt + K_d \frac{de(t)}{dt}</script><h2 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h2><ol>
+<li><strong>比例环节</strong> 的作用是对偏差瞬间做出快速相应。偏差一旦产生，控制器立即产生控制作用，使控制量向偏差的方向变化。过大的$K_p$会导致系统震荡，破坏系统的稳定性。</li>
+<li><strong>积分环节</strong> 的作用是把偏差的积累作为输出。在控制过程中，只要偏差存在，积分环节的输出就会不断增大，直到偏差为零，输出的 $u(t)$才可能维持在某一常量。<br>积分环节的调节作用虽然会消除静态误差，但也会降低系统的响应速度，增加系统的超调量。减小$K_i$会减慢静态误差的消除过程，但可以减少超调量，提高系统的稳定性。</li>
+<li><strong>微分环节</strong> 的作用是阻止偏差的变化。它根据偏差的变化趋势进行控制。偏差变化得越快，微分控制器的输出越大，并能在偏差值变大之前进行修正。<br>微分作用的引入，将有助于减少超调量，客服震荡，使系统趋于稳定。但微分的作用对输入信号的噪声很敏感，对那些噪声大的系统一般不用微分，或在微分起作用之前先对输入信号进行滤波。</li>
+</ol>
+<h2 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h2><p>计算机控制是一种采样控制，它只能根据采样许可的偏差计算控制量，而不能像模拟控制那样连续输出控制量，进行连续控制，所以公式中的积分和微分项不能直接使用，必须进行离散化处理。通常依据控制器输出与执行机构的对应关系，将基本数字PID算法分为<strong>位置式PID</strong>和<strong>增量式PID</strong>两种。</p>
+<h3 id="位置型PID"><a href="#位置型PID" class="headerlink" title="位置型PID"></a>位置型PID</h3><script type="math/tex; mode=display">
+u(k)=K_pe(k) + K_i\sum_{j=0}^{k}{Te(j)} + K_d\frac{e(k)-e(k-1)}{T}</script><p>位置PID结构简单，但是由于有积分项，容易产生积分饱和的现象，而且它每次输出的都是全量，此全量均和过去的输出有关，易产生累计误差。需要对其进行改进，由此产生的改进型PID控制器——增量型PID控制器。其区别在于，控制器输出的不是全量，而只是增量，每次输出均与过去的所有状态无关，而且它没有积分项，运算量小，容易实现手动到自动的无冲击切换。</p>
+<h3 id="增量型PID"><a href="#增量型PID" class="headerlink" title="增量型PID"></a>增量型PID</h3><script type="math/tex; mode=display">
+\begin{aligned}
+\Delta u & =u(k)-u(k-1)\\
+& =K_p[e(k)-e(k-1)]+K_iTe(k)+K_d\frac{e(k)-2e(k-1)+e(k-2)}{T}
+\end{aligned}</script><h2 id="C-代码实现"><a href="#C-代码实现" class="headerlink" title="C++代码实现"></a>C++代码实现</h2><p>参考大神<a href="https://blog.csdn.net/shuoyueqishilove/article/details/73824173" target="_blank" rel="noopener">csdn博客</a><br>首先创建一个PID类</p>
+<pre><code>class PID
+{
+private:
+  float kp;     //比例系数
+  float ki;     //积分系数
+  float kd;     //微分系数
+  float target; //目标值
+  float actual; //实际值
+  float e;      //本次误差
+  float e_pre_1;    //上一次误差
+  float e_pre_2;   //上上次误差
+  float integral;   //积分项
+  float T;          //周期，采样时间，默认为1
+
+public:
+  PID();
+  ~PID(){};
+  PID(float p,float i,float d);
+  PID(float p,float i,float d, float T);
+  float pid_position(float tar,float act);//执行位置型PID控制
+  float pid_incremental(float tar,float act);//执行增量型PID控制
+  void pid_show();//显示PID控制器的内部参数
+
+}
+</code></pre><p>接下来，对类中声明的方法进行定义；</p>
+<pre><code>//构造函数
+PID::PID():kp(0),ki(0),kd(0),target(0),actual(0),integral(0)
+{
+  e = target-actual;
+  e_pre_1 = e;
+  e_pre_2 = e;
+  T = 1;//周期默认为1
+}
+PID::PID(float p,float i,float d):kp(p),ki(i),kd(d),target(0),actual(0),integral(0)
+{
+  e = target-actual;
+  e_pre_1 = e;
+  e_pre_2 = e;
+  T = 1;
+}
+PID::PID(float p,float i,float d,float t):kp(p),ki(i),kd(d),target(0),actual(0),integral(0)
+{
+  e = target-actual;
+  e_pre_1 = e;
+  e_pre_2 = e;
+  T = t;
+}
+
+//显示函数
+void PID::pid_show()
+{
+  using std::cout;
+  using std::endl;
+  cout&lt;&lt;&quot;PID控制器的信息如下:&quot;&lt;&lt;endl;
+  cout&lt;&lt;&quot; 比例系数=&quot;&lt;&lt;kp&lt;&lt;endl;
+  cout&lt;&lt;&quot; 积分系数=&quot;&lt;&lt;ki&lt;&lt;endl;
+  cout&lt;&lt;&quot; 微分系数=&quot;&lt;&lt;kd&lt;&lt;endl;
+  cout&lt;&lt;&quot; 积分值=&quot;&lt;&lt;integral&lt;&lt;endl;
+  cout&lt;&lt;&quot; 目标值=&quot;&lt;&lt;target&lt;&lt;endl;
+  cout&lt;&lt;&quot; 实际值=&quot;&lt;&lt;actual&lt;&lt;endl;
+  cout&lt;&lt;&quot; 本次误差=&quot;&lt;&lt;e&lt;&lt;endl;
+  cout&lt;&lt;&quot; 上次误差=&quot;&lt;&lt;e_pre_1&lt;&lt;endl;
+  cout&lt;&lt;&quot; 上上次误差=&quot;&lt;&lt;e_pre_2&lt;&lt;endl;
+}
+
+//位置式PID控制函数
+float PID::pid_position(float tar,float act)
+{
+  float u;
+  target = tar;
+  actual = act;
+  //更新误差
+  e_pre_2 = e_pre_1;
+  e_pre_1 = e;
+  e = target-actual;
+  //计算积分
+  integral += e;
+
+  u = kp*e + ki*T*integral + kd*(e-e_pre_1)/T;
+  return u;
+}
+
+//增量式PID控制函数
+float PID::pid_incremental(float tar, float act)
+{
+  float u_incremental;
+  target = tar;
+  actual = act;
+  //更新误差
+  e_pre_2 = e_pre_1;
+  e_pre_1 = e;
+  e = target-actual;
+  //计算系数
+  float A = kp+ki*T+kd/T;
+  float B = -kp - 2*kd/T;
+  float C = kd/T;
+  u_incremental = A*e + B*e_pre_1 + C*e_pre_2;
+  return u_incremental;
+}
+</code></pre><p>下面是测试代码：</p>
+<pre><code>#include &lt;iostream&gt;
+#include &quot;PID_Controller.h&quot;
+using namespace std;
+
+int main()
+{
+  PID pid1(0.35, 0.65, 0.005); //类，位置型
+  PID pid2(0.35, 0.65, 0.005); //类，增量型
+  float target = 1000.0;
+  float actual_p = 0.0;//位置型
+  float actual_i = 0.0;//增量型
+  float pid_incremental = 0.0;
+  int n = 30;
+
+  pid1.pid_show();
+  pid2.pid_show();
+
+  //位置型控制
+  cout&lt;&lt; &quot;target=&quot; &lt;&lt; target &lt;&lt; endl;
+  for(int i = 1;i&lt;=n;i++)
+  {
+    actual_p = pid1.pid_position(target, actual_p);
+    cout&lt;&lt;&quot;i=&quot;&lt;&lt;i&lt;&lt;&quot;    actual_p = &quot;&lt;&lt;actual_p&lt;&lt;endl;      
+  }
+  //增量型控制
+  for(int i = 1;i&lt;=n;i++)
+  {
+    pid_incremental = pid2.pid_incremental(target, actual_i);
+    actual_i += pid_incremental;
+    cout&lt;&lt;&quot;i=&quot;&lt;&lt;i&lt;&lt;&quot;    actual_i = &quot;&lt;&lt;actual_i&lt;&lt;endl;      
+  }
+
+  return 0;
+}
+</code></pre><h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">位置型</th>
+<th style="text-align:center">增量型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="/2018/09/21/算法-控制-PID算法/1.JPG"></td>
+<td style="text-align:center"><img src="/2018/09/21/算法-控制-PID算法/2.JPG"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>结果显示：两种算法的结果是完全一样的。根据我自己的理解，模型存在误差的时候，结果才会有差别，这个后面需要继续研究。</p>
+<h2 id="位置型和增量型PID的区别"><a href="#位置型和增量型PID的区别" class="headerlink" title="位置型和增量型PID的区别"></a>位置型和增量型PID的区别</h2><p>参考<a href="https://blog.csdn.net/qq1205512384/article/details/72614871" target="_blank" rel="noopener">博客</a></p>
+<ol>
+<li>位置式PID是一种非递推算法，其输出直接控制执行机构，$u(k)$ 的值与执行机构一一对应。<br>增量式PID是一种递推算法，$u(k)$对应本次执行机构位置的增量。</li>
+<li>位置式算法的缺点：当前采样时刻的输出$u(k)$与过去各个状态有关，计算时要对$e(k)$进行累加，运算量大，且控制器输出对应执行机构的实际位置，若计算机出现故障（例如数据溢出等），$u(k)$的大幅变化会引起执行机构的大幅变化。<br>增量式算法的优点：（1）算式中不需要累加，控制增量的确定仅与最近3次的采样值有关，容易通过加权处理获得较好的控制效果；（2）计算机每次只输出控制增量，机器发生故障时的影响范围小、不会严重影响生产过程；（3）手动-自动切换时冲击小。当控制从手动向自动切换时，可以做到无扰动切换。</li>
+<li>增量式PID并无积分作用，该方法适用于执行机构带积分部件的对象，如步进电机等，而位置式PID适用于执行机构不带积分部件的对象，如电液伺服阀。</li>
+<li>位置式的缺点就是<strong>积分饱和</strong>，也就是当控制量已经达到最大时，误差仍然积分作用下继续累加，一旦误差开始反向变化，则系统需要较长时间从饱和区退出。当$u(k)$达到最大和最小时，需要停止积分作用，否则进入饱和时，则难以对误差的变化有快速的反应。如采用增量式则可以次消除这个问题。<br>两者的唯一区别就是：位置式PI需要同时设置<strong>积分限幅和输出限幅</strong>，而增量式PI只需要<strong>输出限幅</strong>。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="宁子安 WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="宁子安 Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/控制/" rel="tag"># 控制</a>
+          
+            <a href="/tags/PID/" rel="tag"># PID</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/14/计划-博士期间学习计划/" rel="next" title="博士期间学习计划">
+                <i class="fa fa-chevron-left"></i> 博士期间学习计划
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/25/编程-Hexo-Hexo教程2_部署的时候要求输入github用户名和密码的问题/" rel="prev" title="Hexo教程2：部署的时候要求输入github用户名和密码的问题">
+                Hexo教程2：部署的时候要求输入github用户名和密码的问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.JPG"
+               alt="宁子安" />
+          <p class="site-author-name" itemprop="name">宁子安</p>
+           
+              <p class="site-description motion-element" itemprop="description">自律是快乐的根源！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ningzian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/ningzian/activities" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/p/1005052321760873/home?from=page_100505&mod=TAB#place" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式"><span class="nav-number">1.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#意义"><span class="nav-number">2.</span> <span class="nav-text">意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#离散化"><span class="nav-number">3.</span> <span class="nav-text">离散化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#位置型PID"><span class="nav-number">3.1.</span> <span class="nav-text">位置型PID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增量型PID"><span class="nav-number">3.2.</span> <span class="nav-text">增量型PID</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-代码实现"><span class="nav-number">4.</span> <span class="nav-text">C++代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试结果"><span class="nav-number">5.</span> <span class="nav-text">测试结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位置型和增量型PID的区别"><span class="nav-number">6.</span> <span class="nav-text">位置型和增量型PID的区别</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2018年1月 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">宁子安</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+
+
+
+
+
+</body>
+</html>
