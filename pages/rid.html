@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哨兵RID监测系统</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, html {
+            width: 100%; height: 100%;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* 全屏地图 */
+        #map {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+
+        /* 缩放控件下移，避开顶部栏 */
+        .leaflet-top.leaflet-right {
+            top: 48px;
+        }
+
+        /* 顶部信息条 */
+        .top-bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 18px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 100%);
+            pointer-events: none;
+        }
+        .top-bar > * { pointer-events: auto; }
+        .top-bar .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+        }
+        .top-bar .brand .dot {
+            width: 10px; height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10b981;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%,100% { opacity: 1; box-shadow: 0 0 6px #10b981; }
+            50% { opacity: 0.4; box-shadow: 0 0 14px #10b981; }
+        }
+        .top-bar .brand h1 {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .top-bar .time {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.8rem;
+            font-family: 'Consolas', monospace;
+        }
+        .top-bar .serial-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .serial-btn {
+            padding: 6px 16px;
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.08);
+            color: #e2e8f0;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .serial-btn:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.4);
+        }
+        .serial-btn.connected {
+            background: rgba(16,185,129,0.2);
+            border-color: rgba(16,185,129,0.5);
+            color: #34d399;
+        }
+        .serial-status {
+            font-size: 0.7rem;
+            color: #94a3b8;
+        }
+        .serial-status .port-name {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        /* 浮动卡片容器 */
+        .overlay-card {
+            position: fixed;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 14px 18px;
+            color: #e2e8f0;
+            font-size: 0.82rem;
+            min-width: 200px;
+            max-width: 300px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            transition: opacity 0.3s;
+        }
+        .overlay-card h3 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .overlay-card .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2px 0;
+        }
+        .overlay-card .row .key {
+            color: #94a3b8;
+            font-size: 0.7rem;
+        }
+        .overlay-card .row .val {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #f1f5f9;
+            text-align: right;
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .overlay-card .row .val.speed { color: #60a5fa; }
+        .overlay-card .row .val.alt { color: #34d399; }
+        .overlay-card .row .val.coord { color: #fbbf24; font-size: 0.75rem; }
+        .overlay-card .row .val.sta { font-weight: 700; }
+
+        /* 状态标签色 */
+        .sta-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        .sta-0 { background: rgba(148,163,184,0.2); color: #94a3b8; }
+        .sta-1 { background: rgba(52,211,153,0.2); color: #34d399; }
+        .sta-2 { background: rgba(96,165,250,0.2); color: #60a5fa; }
+        .sta-3 { background: rgba(52,211,153,0.25); color: #34d399; animation: staPulse 1.5s infinite; }
+        .sta-4 { background: rgba(251,191,36,0.2); color: #fbbf24; }
+        .sta-5 { background: rgba(248,113,113,0.25); color: #f87171; animation: staPulse 0.8s infinite; }
+        @keyframes staPulse {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* 右下：图例 */
+        .card-legend {
+            bottom: 30px; right: 14px;
+            min-width: auto;
+            padding: 10px 16px;
+        }
+        .card-legend .legend-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 4px 0;
+            font-size: 0.72rem;
+            color: #cbd5e1;
+        }
+        .card-legend .legend-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .legend-uav { background: #3b82f6; box-shadow: 0 0 6px #3b82f6; }
+        .legend-op  { background: #10b981; box-shadow: 0 0 6px #10b981; }
+
+        /* 可折叠面板 */
+        .toggle-btn {
+            position: absolute;
+            top: 8px; right: 8px;
+            width: 20px; height: 20px;
+            background: rgba(255,255,255,0.08);
+            border: none;
+            border-radius: 4px;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 0.65rem;
+            line-height: 1;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .toggle-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+        .card-body.collapsed { display: none; }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .overlay-card {
+                max-width: 180px;
+                padding: 10px 14px;
+                font-size: 0.7rem;
+            }
+            .card-uav { max-width: 190px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== 全屏地图 ========== -->
+    <div id="map"></div>
+
+    <!-- ========== 顶部条 ========== -->
+    <div class="top-bar">
+        <div class="brand">
+            <div class="dot"></div>
+            <h1>哨兵RID监测系统</h1>
+        </div>
+        <div class="serial-area">
+            <span class="serial-status" id="serialStatus"></span>
+            <button class="serial-btn" id="serialBtn" onclick="toggleSerial()">🔌 连接串口</button>
+            <span class="time" id="clock">--</span>
+        </div>
+    </div>
+
+    <!-- ========== 右下：图例 ========== -->
+    <div class="overlay-card card-legend">
+        <div class="legend-row"><div class="legend-dot legend-uav"></div> 无人机</div>
+        <div class="legend-row"><div class="legend-dot legend-op"></div> 操作员</div>
+    </div>
+
+    <!-- ========== Leaflet + 脚本 ========== -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+    // ==================== 协议常量 ====================
+    const UAV_TYPE_MAP  = { 0:'未定义',1:'开放类',2:'特许类',3:'审定类',4:'预留',5:'预留',6:'预留',7:'预留',8:'预留',9:'预留',10:'预留',11:'预留',12:'预留',13:'预留',14:'预留',15:'预留' };
+    const ID_TYPE_MAP   = { 0:'微型',1:'轻型',2:'小型',3:'其它(识别)',4:'预留' };
+    const STA_MAP       = { 0:'未定义',1:'待飞',2:'起飞',3:'飞行中',4:'降落',5:'紧急' };
+
+    // ==================== 地图 ====================
+    const map = L.map('map', {
+        zoomControl: false,
+        attributionControl: false
+    }).setView([30.32797, 104.08121], 17);
+
+    L.control.zoom({ position: 'topright' }).addTo(map);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
+
+    // 自定义图标
+    const uavIcon = L.divIcon({
+        className: '',
+        html: `<div style="background:#3b82f6;width:14px;height:14px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 10px #3b82f6;animation:dotPulse 1.5s infinite;"></div>`,
+        iconSize: [22,22], iconAnchor: [11,11]
+    });
+    const opIcon = L.divIcon({
+        className: '',
+        html: `<div style="background:#10b981;width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 6px #10b981;"></div>`,
+        iconSize: [18,18], iconAnchor: [9,9]
+    });
+
+    const styleEl = document.createElement('style');
+    styleEl.textContent = '@keyframes dotPulse{0%,100%{box-shadow:0 0 6px #3b82f6}50%{box-shadow:0 0 18px #3b82f6}}';
+    document.head.appendChild(styleEl);
+
+    // 无人机标记集合 (key: UAV.ID)
+    const uavMarkers = new Map();
+    const opMarker = L.marker([0, 0], { icon: opIcon });
+
+    let operatorVisible = false;
+    const UAV_TIMEOUT = 10000;
+
+    // 创建/获取无人机标记
+    function getOrCreateUavMarker(uav) {
+        let entry = uavMarkers.get(uav.ID);
+        if (!entry) {
+            const marker = L.marker([uav.Lat, uav.Lon], { icon: uavIcon }).addTo(map);
+            const line = L.polyline([], {
+                color: 'rgba(255,255,255,0.15)',
+                weight: 1.5,
+                dashArray: '5, 8',
+            });
+            // 仅当操作员可见时才将连线添加到地图
+            if (operatorVisible) line.addTo(map);
+            entry = { marker, line, timeoutId: null };
+            uavMarkers.set(uav.ID, entry);
+            console.log('🛩️ 新增无人机:', uav.ID);
+        }
+        // 重置超时
+        if (entry.timeoutId) clearTimeout(entry.timeoutId);
+        entry.timeoutId = setTimeout(() => removeUavMarker(uav.ID), UAV_TIMEOUT);
+        return entry;
+    }
+
+    function removeUavMarker(uavId) {
+        const entry = uavMarkers.get(uavId);
+        if (!entry) return;
+        if (entry.timeoutId) clearTimeout(entry.timeoutId);
+        entry.marker.remove();
+        if (entry.line._map) entry.line.remove();
+        uavMarkers.delete(uavId);
+        console.log('❌ 无人机超时移除:', uavId);
+
+        // 如果所有无人机都移除了，也移除操作员
+        if (uavMarkers.size === 0) {
+            if (opMarker._map) opMarker.remove();
+            operatorVisible = false;
+            map.setView([30.32797, 104.08121], 17);
+        }
+    }
+
+    // ==================== 操作员显示切换 ====================
+    function toggleOperator(show) {
+        operatorVisible = show;
+        if (show) {
+            if (!opMarker._map) opMarker.addTo(map);
+            uavMarkers.forEach(entry => { if (!entry.line._map) entry.line.addTo(map); });
+        } else {
+            if (opMarker._map) opMarker.remove();
+            uavMarkers.forEach(entry => { if (entry.line._map) entry.line.remove(); });
+        }
+    }
+
+    // ==================== 数据更新 ====================
+    function updateAllDisplays(data) {
+        const uav = data.UAVInfo;
+        const op  = data.OperatorInfo;
+        const sta = uav.Sta;
+
+        // 获取或创建此无人机的标记
+        const entry = getOrCreateUavMarker(uav);
+        const { marker, line } = entry;
+
+        // 距离计算 (Haversine)
+        const R = 6371000;
+        const dLat = (op.Lat - uav.Lat) * Math.PI / 180;
+        const dLon = (op.Lon - uav.Lon) * Math.PI / 180;
+        const a = Math.sin(dLat/2)**2 + Math.cos(uav.Lat*Math.PI/180)*Math.cos(op.Lat*Math.PI/180) * Math.sin(dLon/2)**2;
+        const dist = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+        // 更新无人机标记
+        marker.setLatLng([uav.Lat, uav.Lon]);
+        marker.bindPopup(`
+            <div style="min-width:260px;font-size:13px;line-height:1.8;">
+            <div style="font-size:15px;font-weight:700;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid #3b82f6;">🛩️ 无人机</div>
+            <table style="width:100%;border-collapse:collapse;">
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">RID标准号</td><td style="font-weight:600;">${uav.RID_Standard || '--'}</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">唯一标识</td><td style="font-weight:600;">${uav.ID}</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">实名登记号</td><td style="font-weight:600;">${uav.Reg || '(空)'}</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">无人机类型</td><td style="font-weight:600;">${UAV_TYPE_MAP[uav.Type]} (Type=${uav.Type})</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">ID类型</td><td style="font-weight:600;">${ID_TYPE_MAP[uav.ID_Type]} (ID_Type=${uav.ID_Type})</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">运行状态</td><td style="font-weight:700;color:${sta===3?'#34d399':sta===5?'#f87171':'#f1f5f9'};">${STA_MAP[sta]} (Sta=${sta})</td></tr>
+            <tr><td colspan="2" style="padding:4px 0;border-top:1px solid rgba(255,255,255,0.1);"></td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">经度</td><td style="font-weight:600;color:#fbbf24;">${uav.Lon.toFixed(6)}°</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">纬度</td><td style="font-weight:600;color:#fbbf24;">${uav.Lat.toFixed(6)}°</td></tr>
+            <tr><td colspan="2" style="padding:4px 0;border-top:1px solid rgba(255,255,255,0.1);"></td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">水平速度</td><td style="font-weight:600;color:#60a5fa;">${uav.H_Speed.toFixed(1)} m/s</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">垂直速度</td><td style="font-weight:600;color:#60a5fa;">${uav.V_Speed.toFixed(1)} m/s</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">相对高度</td><td style="font-weight:600;color:#34d399;">${uav.AltGeo.toFixed(1)} m</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">地面高度</td><td style="font-weight:600;color:#34d399;">${uav.Height.toFixed(1)} m</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">大气高度</td><td style="font-weight:600;color:#34d399;">${uav.AltBaro.toFixed(1)} m</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">航迹角</td><td style="font-weight:600;color:#fbbf24;">${uav.Trk.toFixed(1)}°</td></tr>
+            <tr><td colspan="2" style="padding:4px 0;border-top:1px solid rgba(255,255,255,0.1);"></td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">时间戳</td><td style="font-weight:600;">${new Date(uav.T_Stamp * 1000).toLocaleString('zh-CN')}</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">距操作员</td><td style="font-weight:700;color:#34d399;">${dist.toFixed(1)} m</td></tr>
+            <tr><td colspan="2" style="padding:6px 0 0 0;border-top:1px solid rgba(255,255,255,0.1);">
+            <label style="cursor:pointer;font-size:12px;color:#94a3b8;display:flex;align-items:center;gap:6px;">
+            <input type="checkbox" ${operatorVisible?'checked':''} onchange="toggleOperator(this.checked)" style="accent-color:#10b981;"> 显示操作员位置
+            </label>
+            </td></tr>
+            </table>
+            </div>
+        `);
+
+        // 更新连线
+        line.setLatLngs([[uav.Lat, uav.Lon], [op.Lat, op.Lon]]);
+
+        // 更新操作员标记
+        opMarker.setLatLng([op.Lat, op.Lon]);
+        opMarker.bindPopup(`
+            <div style="min-width:220px;font-size:13px;line-height:1.8;">
+            <div style="font-size:15px;font-weight:700;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid #10b981;">👤 操作员</div>
+            <table style="width:100%;border-collapse:collapse;">
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">高度</td><td style="font-weight:600;color:#34d399;">${op.Height.toFixed(2)} m</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">经度</td><td style="font-weight:600;color:#fbbf24;">${op.Lon.toFixed(6)}°</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">纬度</td><td style="font-weight:600;color:#fbbf24;">${op.Lat.toFixed(6)}°</td></tr>
+            <tr><td colspan="2" style="padding:4px 0;border-top:1px solid rgba(255,255,255,0.1);"></td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">在线无人机</td><td style="font-weight:700;color:#60a5fa;">${uavMarkers.size} 架</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">最近无人机</td><td style="font-weight:600;">${uav.ID}</td></tr>
+            <tr><td style="color:#94a3b8;padding:1px 8px 1px 0;white-space:nowrap;">距离</td><td style="font-weight:700;color:#34d399;">${dist.toFixed(1)} m</td></tr>
+            </table>
+            </div>
+        `);
+
+        // 自适应视野
+        const bounds = L.latLngBounds([uav.Lat, uav.Lon], [op.Lat, op.Lon]);
+        map.fitBounds(bounds, { padding: [100, 100], maxZoom: 18 });
+    }
+
+    // ==================== 时钟 ====================
+    function updateClock() {
+        document.getElementById('clock').textContent = new Date().toLocaleString('zh-CN');
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+
+    // ==================== 外部 API ====================
+    window.updateMonitorData = function(jsonData) {
+        try {
+            const data = typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData;
+            if (data.MonitorInfo && data.UAVInfo && data.OperatorInfo) {
+                updateAllDisplays(data);
+            } else {
+                console.warn('数据需包含 MonitorInfo, UAVInfo, OperatorInfo');
+            }
+        } catch(e) { console.error(e); }
+    };
+
+    // ==================== 串口连接 ====================
+    let port = null;
+    let reader = null;
+    let serialBuffer = '';
+
+    function updateSerialUI(connected, portName) {
+        const btn = document.getElementById('serialBtn');
+        const status = document.getElementById('serialStatus');
+        if (connected) {
+            btn.textContent = '🔌 已连接';
+            btn.classList.add('connected');
+            status.innerHTML = '<span class="port-name">' + portName + '</span>';
+        } else {
+            btn.textContent = '🔌 连接串口';
+            btn.classList.remove('connected');
+            status.innerHTML = '';
+        }
+    }
+
+    async function toggleSerial() {
+        if (port) {
+            await disconnectSerial();
+        } else {
+            await connectSerial();
+        }
+    }
+
+    async function connectSerial() {
+        if (!('serial' in navigator)) {
+            alert('当前浏览器不支持 Web Serial API，请使用 Chrome/Edge 浏览器。');
+            return;
+        }
+        try {
+            port = await navigator.serial.requestPort();
+            await port.open({ baudRate: 115200 });
+            updateSerialUI(true, 'COM端口已连接');
+
+            // 获取端口信息
+            const info = port.getInfo();
+            if (info.usbVendorId) {
+                updateSerialUI(true, 'USB VID:' + info.usbVendorId.toString(16) + ' PID:' + info.usbProductId.toString(16));
+            }
+
+            reader = port.readable.getReader();
+            readSerialLoop();
+        } catch (e) {
+            if (e.name !== 'AbortError') {
+                console.error('串口连接失败:', e);
+                updateSerialUI(false);
+                port = null;
+            }
+        }
+    }
+
+    async function readSerialLoop() {
+        const decoder = new TextDecoder();
+        try {
+            while (port && reader) {
+                const { value, done } = await reader.read();
+                if (done) break;
+                if (value) {
+                    serialBuffer += decoder.decode(value, { stream: true });
+                    // 按换行符分割，逐条解析 JSON
+                    let idx;
+                    while ((idx = serialBuffer.indexOf('\n')) !== -1) {
+                        const line = serialBuffer.substring(0, idx).trim();
+                        serialBuffer = serialBuffer.substring(idx + 1);
+                        if (line) {
+                            try {
+                                const data = JSON.parse(line);
+                                if (data.UAVInfo && data.OperatorInfo) {
+                                    updateAllDisplays(data);
+                                }
+                            } catch (e) {
+                                // 忽略不完整的 JSON 行
+                                console.warn('JSON解析失败:', line.substring(0, 60));
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (e) {
+            console.error('串口读取错误:', e);
+        }
+        // 读取循环退出，尝试清理
+        if (port) {
+            await disconnectSerial();
+        }
+    }
+
+    async function disconnectSerial() {
+        try {
+            if (reader) {
+                await reader.cancel();
+                reader.releaseLock();
+                reader = null;
+            }
+            if (port) {
+                await port.close();
+                port = null;
+            }
+        } catch (e) {
+            console.error('断开串口错误:', e);
+        }
+        serialBuffer = '';
+        updateSerialUI(false);
+    }
+
+    // 监听串口意外断开
+    navigator.serial?.addEventListener('disconnect', (e) => {
+        if (e.target === port) {
+            port = null;
+            reader = null;
+            serialBuffer = '';
+            updateSerialUI(false);
+            console.log('串口已断开');
+        }
+    });
+
+    // 检查 Web Serial API 是否可用
+    if ('serial' in navigator) {
+        console.log('%c🔌 Web Serial API 可用，点击"连接串口"接入设备', 'color:#10b981;');
+    } else {
+        console.warn('⚠️ 当前浏览器不支持 Web Serial API，请使用 Chrome/Edge');
+    }
+    </script>
+</body>
+</html>

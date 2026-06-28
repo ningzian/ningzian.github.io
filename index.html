@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公司名称 - 官网首页</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- ========== 导航栏 ========== -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="media/logo.png" alt="玄铁时代" class="logo-img">
+                <span class="logo-text">
+                    <span class="logo-title">玄铁时代</span>
+                    <span class="logo-subtitle">致力于解决低空安防重大问题</span>
+                </span>
+            </a>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="pages/products.html" class="dropdown-toggle">产品矩阵</a>
+                    <div class="dropdown-menu">
+                        <a href="pages/sentinel.html">哨兵系列</a>
+                        <a href="pages/skyhawk.html">天巡系列</a>
+                        <a href="pages/halberd.html">飞戟系列</a>
+                        <a href="pages/shield.html">玄盾大脑</a>
+                        <a href="pages/products.html#forge">铸盾服务</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="pages/technology.html" class="dropdown-toggle">核心技术</a>
+                    <div class="dropdown-menu">
+                        <a href="pages/technology.html#detect">无人机探测</a>
+                        <a href="pages/technology.html#predict">目标运动预测</a>
+                        <a href="pages/technology.html#counter">物理反制</a>
+                        <a href="pages/technology.html#integrate">系统集成</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="pages/applications.html" class="dropdown-toggle">应用场景</a>
+                    <div class="dropdown-menu">
+                        <a href="pages/applications.html#site">要地安防</a>
+                        <a href="pages/applications.html#vip">要人保护</a>
+                        <a href="pages/applications.html#event">要事保障</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="pages/news.html" class="dropdown-toggle">新闻动态</a>
+                    <div class="dropdown-menu">
+                        <a href="pages/news.html">低空安全</a>
+                        <a href="pages/news.html">行业动态</a>
+                        <a href="pages/news.html">公司新闻</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="pages/about.html" class="dropdown-toggle">关于我们</a>
+                    <div class="dropdown-menu">
+                        <a href="pages/about.html#company">公司介绍</a>
+                        <a href="pages/about.html#team">团队介绍</a>
+                        <a href="pages/about.html#join">加入我们</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="pages/support.html" class="dropdown-toggle">服务与支持</a>
+                    <div class="dropdown-menu">
+                        <a href="pages/support.html#download">软件下载</a>
+                        <a href="pages/support.html#docs">文档手册</a>
+                        <a href="pages/support.html#tech-blog">技术科普</a>
+                        <a href="pages/support.html#faq">常见问题</a>
+                        <a href="pages/support.html#contact">联系我们</a>
+                    </div>
+                </li>
+            </ul>
+            <button class="nav-toggle" aria-label="切换菜单">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========== 首页 Hero 区域（视频 / 大图） ========== -->
+    <section id="home" class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="media/hero-bg.mp4" type="video/mp4">
+        </video>
+        <!-- 如果没有视频，会显示下面的背景图片 -->
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>以硬核科技，解决低空安防重大问题</h1>
+            <p>多篇顶刊论文支撑 | 多所顶尖高校合作 | 八年深厚技术积累</p>
+        </div>
+    </section>
+
+    <!-- ========== 产品矩阵 ========== -->
+    <section id="products" class="products section">
+        <div class="container">
+            <a href="pages/products.html">
+                <h2 class="section-title">产品矩阵</h2>
+                <p class="section-subtitle">全方位低空安防产品体系，满足不同场景需求</p>
+            </a>
+            
+
+            <div class="product-arch">
+                <!-- 外层：铸盾服务 -->
+                <a href="pages/products.html#forge" class="arch-forge" aria-label="铸盾服务">
+                    <span class="arch-forge-label-top">铸盾服务</span>
+                    <span class="arch-forge-sub">定制化低空安防解决方案</span>
+                </a>
+
+                <!-- 中间：3个产品系列 -->
+                <div class="arch-products">
+                    <a href="pages/sentinel.html" class="arch-product arch-product-left">
+                        <div class="arch-product-circle">
+                            <span class="arch-product-icon">🔭</span>
+                        </div>
+                        <h3>哨兵系列</h3>
+                        <p>无人机侦测</p>
+                    </a>
+                    <a href="pages/skyhawk.html" class="arch-product arch-product-center">
+                        <div class="arch-product-circle">
+                            <span class="arch-product-icon">🦅</span>
+                        </div>
+                        <h3>天巡系列</h3>
+                        <p>空中察打</p>
+                    </a>
+                    <a href="pages/halberd.html" class="arch-product arch-product-right">
+                        <div class="arch-product-circle">
+                            <span class="arch-product-icon">⚔️</span>
+                        </div>
+                        <h3>飞戟系列</h3>
+                        <p>高机动拦截</p>
+                    </a>
+                </div>
+
+                <!-- 底层：玄盾大脑 -->
+                <a href="pages/shield.html" class="arch-brain">
+                    <div class="arch-brain-platform">
+                        <div class="arch-brain-inner">
+                            <svg class="arch-brain-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="26" height="18" rx="2"/>
+                                <line x1="8" y1="24" x2="24" y2="24"/>
+                                <line x1="16" y1="24" x2="16" y2="29"/>
+                                <line x1="10" y1="29" x2="22" y2="29"/>
+                                <circle cx="16" cy="10" r="3"/>
+                                <polyline points="10 16 14 13 16 15 22 10"/>
+                            </svg>
+                            <span class="arch-brain-label">玄盾大脑</span>
+                            <span class="arch-brain-sub">指挥决策中枢</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========== 核心技术 ========== -->
+    <section id="technology" class="section bg-light">
+        <div class="container">
+            <a href="pages/technology.html">
+                <h2 class="section-title">核心技术</h2>
+                <p class="section-subtitle">以顶尖学术驱动工程突破</p>
+            </a>
+
+            <!-- 三大支柱 -->
+            <div class="tech-pillars">
+                <div class="tech-pillar">
+                    <span class="tech-pillar-num">12+</span>
+                    <h3>顶刊论文支撑</h3>
+                    <p>IJRR · T-RO · RAL 等机器人顶级期刊，奠定技术理论基础</p>
+                </div>
+                <div class="tech-pillar">
+                    <span class="tech-pillar-num">∞</span>
+                    <h3>顶尖高校合作</h3>
+                    <p>与上海交通大学航空航天学院深度产研合作，持续技术输血</p>
+                </div>
+                <div class="tech-pillar">
+                    <span class="tech-pillar-num">8年</span>
+                    <h3>深厚技术积累</h3>
+                    <p>从实验室到实战一线，持续迭代打磨低空安防全栈能力</p>
+                </div>
+            </div>
+
+            <!-- 连接区 -->
+            <div class="tech-bridge">
+                <span class="tech-bridge-line"></span>
+                <span class="tech-bridge-dot"></span>
+                <span class="tech-bridge-text">四项核心技术突破</span>
+                <span class="tech-bridge-dot"></span>
+                <span class="tech-bridge-line"></span>
+            </div>
+
+            <!-- 四项技术 -->
+            <div class="tech-items">
+                <a href="pages/technology.html#detect" class="tech-item">
+                    <div class="tech-item-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="2" r="1.5"/><circle cx="12" cy="22" r="1.5"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>
+                    </div>
+                    <h3>无人机探测</h3>
+                    <p>域适应小目标泛化探测、事件相机旋翼检测、泊松融合数据增强</p>
+                </a>
+                <a href="pages/technology.html#predict" class="tech-item">
+                    <div class="tech-item-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L12 6"/><path d="M4.93 4.93 L7.76 7.76"/><path d="M2 12 L6 12"/><path d="M4.93 19.07 L7.76 16.24"/><path d="M12 18 L12 22"/><path d="M19.07 19.07 L16.24 16.24"/><path d="M18 12 L22 12"/><path d="M19.07 4.93 L16.24 7.76"/></svg>
+                    </div>
+                    <h3>目标运动预测</h3>
+                    <p>单目视觉目标运动估计、分布式多节点协同轨迹预测</p>
+                </a>
+                <a href="pages/technology.html#counter" class="tech-item">
+                    <div class="tech-item-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+                    </div>
+                    <h3>物理反制</h3>
+                    <p>网枪柔性网捕无损带回、机动彩带喷射增加拦截面积</p>
+                </a>
+                <a href="pages/technology.html#integrate" class="tech-item">
+                    <div class="tech-item-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="8" y="17" width="8" height="4" rx="1"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3>系统集成</h3>
+                    <p>探-跟-打全流程闭环、大模型态势感知与智能决策</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 应用场景 ========== -->
+    <section id="applications" class="cases section">
+        <div class="container">
+            <a href="pages/applications.html">
+                <h2 class="section-title">应用场景</h2>
+                <p class="section-subtitle">要地安防 | 要人保护 | 要事保障</p>
+            </a>
+            <div class="cases-grid">
+                <div class="case-card">
+                    <img src="media/case-1.jpg" alt="沿线部署">
+                    <div class="case-info">
+                        <h3>电力线铁塔</h3>
+                        <p>预警无人机入侵，保障线路安全。</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <img src="media/case-2.jpg" alt="要地部署">
+                    <div class="case-info">
+                        <h3>城市安防</h3>
+                        <p>保障重要场所和设施的低空安全。</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <img src="media/case-3.jpg" alt="移动部署">
+                    <div class="case-info">
+                        <h3>重大活动安防</h3>
+                        <p>快速定位违规飞手位置，联动现场警力处置。</p>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 28px;">
+                <a href="pages/applications.html" class="btn-primary">了解更多应用场景 →</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== 新闻动态 ========== -->
+    <section id="news" class="news section bg-light">
+        <div class="container">
+            <a href="pages/news.html">
+                <h2 class="section-title">新闻动态</h2>
+                <p class="section-subtitle">了解公司最新资讯与行业动向</p>
+            </a>
+            <div class="cases-grid">
+                <div class="case-card">
+                    <img src="media/news-1.jpg" alt="新闻一">
+                    <div class="case-info">
+                        <h3>公司参与某国际无人机防控技术交流会</h3>
+                        <p>2026年6月，公司受邀参加国际无人机防控技术交流会并展示最新产品。</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <img src="media/news-2.jpg" alt="新闻二">
+                    <div class="case-info">
+                        <h3>新一代低空雷达系统通过验收</h3>
+                        <p>公司自主研发的新一代低空探测雷达正式通过客户验收并投入使用。</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <img src="media/news-3.jpg" alt="新闻三">
+                    <div class="case-info">
+                        <h3>公司与某省级公安局达成战略合作</h3>
+                        <p>双方将在低空安全保障领域展开深度合作，共建城市低空安防体系。</p>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 28px;">
+                <a href="pages/news.html" class="btn-primary">查看更多新闻 →</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== 关于我们 ========== -->
+    <section id="about" class="section">
+        <div class="container">
+            <a href="pages/about.html">
+                <h2 class="section-title">关于我们</h2>
+                <p class="section-subtitle">产学研深度融合，打造低空安全新范式</p>
+            </a>
+
+            <!-- 公司简介 -->
+            <a href="pages/about.html" class="about-intro">
+                <div class="about-intro-grid">
+                    <div class="about-intro-image">
+                        <img src="media/人工智能小镇.png" alt="人工智能小镇">
+                    </div>
+                    <div class="about-intro-text">
+                        <p>杭州玄铁时代科技有限公司，坐落于杭州人工智能小镇，
+                            与<strong>上海交通大学航空航天学院</strong>深度合作，专注无人机反制领域。
+                            以<strong>"视觉探测 + 物理反制"</strong>为核心技术路线，将前沿科研成果转化为可规模化部署的硬核产品。
+                        </p>
+                        <p>团队核心成员来自上海交通大学，拥有多篇国际顶级期刊论文作为技术支撑。
+                                我们致力于将前沿科研成果，转化为可靠、可规模化部署的低空安防产品，为国家安全和公共安全贡献力量。
+                        </p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 核心团队 -->
+            <div class="about-team-section">
+                <h3 class="about-team-title"><a href="pages/about.html#team">核心团队</a></h3>
+                <div class="about-team-grid">
+                    <a href="pages/about.html#team-ning" class="about-team-card">
+                        <div class="about-team-avatar">
+                            <img src="media/NingZian.jpg" alt="宁子安博士">
+                        </div>
+                        <h4>宁子安 博士</h4>
+                        <span class="about-team-role">创始人 & CEO</span>
+                    </a>
+                    <a href="pages/about.html#team-li" class="about-team-card">
+                        <div class="about-team-avatar">
+                            <img src="media/LiWeipeng.jpg" alt="李伟鹏教授">
+                        </div>
+                        <h4>李伟鹏 教授</h4>
+                        <span class="about-team-role">创始人 & 首席科学家</span>
+                    </a>
+                    <a href="pages/about.html#team-qin" class="about-team-card">
+                        <div class="about-team-avatar">
+                            <img src="media/QinChao.jpg" alt="秦超博士">
+                        </div>
+                        <h4>秦超 博士</h4>
+                        <span class="about-team-role">高级合伙人</span>
+                    </a>
+                    <a href="pages/about.html#team-wang" class="about-team-card">
+                        <div class="about-team-avatar">
+                            <img src="media/WangShijie.jpg" alt="王世杰">
+                        </div>
+                        <h4>王世杰</h4>
+                        <span class="about-team-role">工程师</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 服务与支持 ========== -->
+    <section id="support" class="contact section bg-light">
+        <div class="container">
+            <a href="pages/support.html">
+                <h2 class="section-title">服务与支持</h2>
+                <p class="section-subtitle">专业团队，全程护航</p>
+            </a>
+            <div class="services-grid services-grid-5">
+                <a href="pages/support.html#download" class="service-card" style="text-decoration: none; color: inherit;">
+                    <h3>软件下载</h3>
+                    <p>玄盾平台 · 哨兵工具 · RID系统</p>
+                </a>
+                <a href="pages/support.html#docs" class="service-card" style="text-decoration: none; color: inherit;">
+                    <h3>文档手册</h3>
+                    <p>用户手册 · 飞行手册 · 接口文档</p>
+                </a>
+                <a href="pages/support.html#tech-blog" class="service-card" style="text-decoration: none; color: inherit;">
+                    <h3>技术科普</h3>
+                    <p>深入浅出了解低空安防技术原理</p>
+                </a>
+                <a href="pages/support.html#faq" class="service-card" style="text-decoration: none; color: inherit;">
+                    <h3>常见问题</h3>
+                    <p>购买、保修、演示与售后常见疑问</p>
+                </a>
+                <a href="pages/support.html#contact" class="service-card" style="text-decoration: none; color: inherit;">
+                    <h3>联系我们</h3>
+                    <p>电话/微信：+86 17692170826</p>
+                </a>
+            </div>
+            <p style="text-align: center; margin-top: 28px;">
+                <a href="pages/support.html" class="btn-primary">进入服务与支持中心 →</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== 页脚 ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col footer-col-brand">
+                    <div class="footer-brand-header">
+                        <img src="media/logo.png" alt="玄铁时代" class="footer-logo-img">
+                        <span class="footer-logo-text">
+                            <span class="footer-logo-title">玄铁时代</span>
+                            <span class="footer-logo-subtitle">致力于解决低空安防重大问题</span>
+                        </span>
+                    </div>
+                    <div class="footer-contact">
+                        <p>地址：浙江省杭州市余杭区人工智能小镇5号楼913室</p>
+                        <p>电话/微信：+86 17692170826</p>
+                    </div>
+                    <div class="footer-social">
+                        <span class="social-link social-wechat" aria-label="微信公众号">
+                            <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178A1.17 1.17 0 014.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178 1.17 1.17 0 01-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.742 2.04 2.439 3.379 4.4 4.099 1.88.69 3.973.562 5.94.24.174-.028.34.021.47.12l1.71 1.001c.043.029.103.049.15.049.143 0 .26-.118.26-.264a.472.472 0 00-.044-.192l-.35-1.332a.54.54 0 01.19-.598C19.34 18.558 20.4 16.984 20.4 15.2c0-3.51-3.525-6.342-7.462-6.342zm-2.64 2.384c.53 0 .96.44.96.982a.971.971 0 01-.96.982.971.971 0 01-.96-.982c0-.542.43-.982.96-.982zm4.8 0c.53 0 .96.44.96.982a.971.971 0 01-.96.982.971.971 0 01-.96-.982c0-.542.43-.982.96-.982z"/></svg>
+                            <span>公众号：XuanTie_ShiDai</span>
+                            <span class="wechat-qr"><img src="media/wechat.jpg" alt="微信公众号二维码"></span>
+                        </span>
+                        <span class="social-link social-channels" aria-label="视频号">
+                            <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><polygon points="10,8 16,12 10,16"/></svg>
+                            <span>视频号</span>
+                            <span class="social-qr"><img src="media/二维码视频号.jpg" alt="视频号二维码"></span>
+                        </span>
+                        <a href="https://xhslink.com/m/7SaRB6cYFEc" class="social-link social-redbook" target="_blank" rel="noopener" aria-label="小红书">
+                            <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="2" width="18" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="700" fill="currentColor">红</text></svg>
+                            <span>小红书</span>
+                            <span class="social-qr"><img src="media/二维码小红书.jpg" alt="小红书二维码"></span>
+                        </a>
+                        <a href="https://www.zhihu.com/people/ningzian" class="social-link social-zhihu" target="_blank" rel="noopener" aria-label="知乎">
+                            <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="2" width="18" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">知</text></svg>
+                            <span>知乎</span>
+                            <span class="social-qr"><img src="media/二维码知乎.jpg" alt="知乎二维码"></span>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4><a href="pages/products.html">产品矩阵</a></h4>
+                    <ul>
+                        <li><a href="pages/sentinel.html">哨兵系列</a></li>
+                        <li><a href="pages/skyhawk.html">天巡系列</a></li>
+                        <li><a href="pages/halberd.html">飞戟系列</a></li>
+                        <li><a href="pages/shield.html">玄盾大脑</a></li>
+                        <li><a href="pages/products.html#forge">铸盾服务</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4><a href="pages/technology.html">核心技术</a></h4>
+                    <ul>
+                        <li><a href="pages/technology.html#detect">无人机探测</a></li>
+                        <li><a href="pages/technology.html#predict">目标运动预测</a></li>
+                        <li><a href="pages/technology.html#counter">物理反制</a></li>
+                        <li><a href="pages/technology.html#integrate">系统集成</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4><a href="pages/applications.html">应用场景</a></h4>
+                    <ul>
+                        <li><a href="pages/applications.html#site">要地安防</a></li>
+                        <li><a href="pages/applications.html#vip">要人保护</a></li>
+                        <li><a href="pages/applications.html#event">要事保障</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4><a href="pages/news.html">新闻动态</a></h4>
+                    <ul>
+                        <li><a href="pages/news.html">低空安全</a></li>
+                        <li><a href="pages/news.html">行业动态</a></li>
+                        <li><a href="pages/news.html">公司新闻</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4><a href="pages/about.html">关于我们</a></h4>
+                    <ul>
+                        <li><a href="pages/about.html#company">公司介绍</a></li>
+                        <li><a href="pages/about.html#team">团队介绍</a></li>
+                        <li><a href="pages/about.html#join">加入我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4><a href="pages/support.html">服务与支持</a></h4>
+                    <ul>
+                        <li><a href="pages/support.html#download">软件下载</a></li>
+                        <li><a href="pages/support.html#docs">文档手册</a></li>
+                        <li><a href="pages/support.html#tech-blog">技术科普</a></li>
+                        <li><a href="pages/support.html#faq">常见问题</a></li>
+                        <li><a href="pages/support.html#contact">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 玄铁时代 版权所有 | 备案号待添加</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

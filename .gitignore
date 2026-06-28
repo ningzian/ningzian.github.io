@@ -1,0 +1,10 @@
+﻿# VS Code
+.vscode/sftp.json
+
+# Temp files
+*.tmp
+*冲突副本*
+
+# System files
+Thumbs.db
+Desktop.ini
