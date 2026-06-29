@@ -61,6 +61,77 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // ----- 图片轮播 -----
+    document.querySelectorAll('.carousel').forEach(function (carousel) {
+        var track = carousel.querySelector('.carousel-track');
+        var dotsContainer = carousel.querySelector('.carousel-dots');
+        var prevBtn = carousel.querySelector('.carousel-prev');
+        var nextBtn = carousel.querySelector('.carousel-next');
+        var slides = track.querySelectorAll('img');
+        var totalSlides = slides.length;
+        var currentIndex = 0;
+        var autoplayTimer;
+
+        // 创建导览点
+        for (var i = 0; i < totalSlides; i++) {
+            var dot = document.createElement('span');
+            dot.className = 'carousel-dot';
+            if (i === 0) dot.classList.add('active');
+            dot.setAttribute('data-index', i);
+            dot.addEventListener('click', function () {
+                goToSlide(parseInt(this.getAttribute('data-index')));
+            });
+            dotsContainer.appendChild(dot);
+        }
+
+        var dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+        function goToSlide(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            currentIndex = index;
+            track.style.transform = 'translateX(-' + (index * 100) + '%)';
+            dots.forEach(function (d, i) {
+                d.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() { goToSlide(currentIndex + 1); }
+        function prevSlide() { goToSlide(currentIndex - 1); }
+
+        prevBtn.addEventListener('click', function () {
+            prevSlide();
+            resetAutoplay();
+        });
+        nextBtn.addEventListener('click', function () {
+            nextSlide();
+            resetAutoplay();
+        });
+
+        // 触摸滑动
+        var touchStartX = 0;
+        track.addEventListener('touchstart', function (e) {
+            touchStartX = e.touches[0].clientX;
+        });
+        track.addEventListener('touchend', function (e) {
+            var diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) {
+                diff > 0 ? nextSlide() : prevSlide();
+                resetAutoplay();
+            }
+        });
+
+        // 自动播放
+        function startAutoplay() {
+            autoplayTimer = setInterval(nextSlide, 4000);
+        }
+        function resetAutoplay() {
+            clearInterval(autoplayTimer);
+            startAutoplay();
+        }
+        startAutoplay();
+    });
+
     // 窗口大小变化时重置下拉状态
     var resizeTimer;
     window.addEventListener('resize', function () {

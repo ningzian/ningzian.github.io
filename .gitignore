@@ -5,6 +5,14 @@
 *.tmp
 *冲突副本*
 
+# Temp files (PPT exports, etc.)
+temp/
+
+# Large media files (videos)
+*.mp4
+*.mov
+*.avi
+
 # System files
 Thumbs.db
 Desktop.ini

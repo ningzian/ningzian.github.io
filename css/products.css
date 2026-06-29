@@ -251,6 +251,11 @@
         gap: 24px;
     }
 
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
     .team-member-grid.reverse {
         grid-template-columns: 1fr;
     }
@@ -269,5 +274,230 @@
 
     .company-intro-overlay {
         padding: 60px 0;
+    }
+}
+
+/* ---------- 六大特点 ---------- */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 28px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--color-border);
+    background: #ffffff;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.feature-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(37, 99, 235, 0.08);
+    border-color: rgba(37, 99, 235, 0.3);
+}
+
+.feature-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 14px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.06), rgba(37, 99, 235, 0.12));
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.feature-item:hover .feature-icon {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(37, 99, 235, 0.2));
+}
+
+.feature-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+.feature-item h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 6px;
+}
+
+.feature-item p {
+    font-size: 13px;
+    color: var(--color-text-light);
+    line-height: 1.5;
+}
+
+/* ---------- 产品图片占位 ---------- */
+.section-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.04) 0%, rgba(37, 99, 235, 0.08) 100%);
+    border: 2px dashed rgba(37, 99, 235, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(37, 99, 235, 0.35);
+}
+
+.section-placeholder-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.section-placeholder-text {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: rgba(37, 99, 235, 0.5);
+}
+
+.section-placeholder-hint {
+    font-size: 12px;
+    color: rgba(37, 99, 235, 0.3);
+}
+
+/* ---------- 演示视频卡片 ---------- */
+.demo-video-card {
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.demo-video-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+}
+
+.demo-video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    background: #000;
+}
+
+.demo-video-label {
+    padding: 16px 18px;
+}
+
+.demo-video-tag {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--color-primary);
+    background: rgba(37, 99, 235, 0.08);
+    padding: 3px 12px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.demo-video-title {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 6px;
+}
+
+.demo-video-desc {
+    font-size: 13px;
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ---------- 图片轮播 ---------- */
+.carousel {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-bg-light);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    user-select: none;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.4s ease;
+}
+
+.carousel-track img {
+    min-width: 100%;
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    display: block;
+    background: var(--color-bg-light);
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--color-text);
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, box-shadow 0.2s;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-btn:hover {
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-prev { left: 12px; }
+.carousel-next { right: 12px; }
+
+.carousel-dots {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.carousel-dot.active {
+    background: #ffffff;
+    border-color: #ffffff;
+}
+
+@media (max-width: 480px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
     }
 }
