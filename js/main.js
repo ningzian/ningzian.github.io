@@ -132,6 +132,18 @@ document.addEventListener('DOMContentLoaded', function () {
         startAutoplay();
     });
 
+    // ----- 右侧滚动进度条 -----
+    var progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
+    document.body.appendChild(progressBar);
+
+    window.addEventListener('scroll', function () {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progressBar.style.height = pct + '%';
+    });
+
     // 窗口大小变化时重置下拉状态
     var resizeTimer;
     window.addEventListener('resize', function () {

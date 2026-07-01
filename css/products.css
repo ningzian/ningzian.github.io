@@ -241,7 +241,7 @@
     width: 140px;
     height: 90px;
     border-radius: 10px;
-    object-fit: cover;
+    object-fit: contain;
     background: var(--color-bg-light);
 }
 
@@ -368,7 +368,7 @@
         flex: 0 0 100%;
         width: 100%;
         height: auto;
-        aspect-ratio: 16 / 9;
+        object-fit: contain;
     }
     .news-list-date {
         flex: auto;

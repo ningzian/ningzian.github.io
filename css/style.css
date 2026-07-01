@@ -1377,6 +1377,20 @@ a:has(.section-title):hover .section-subtitle {
     background: var(--color-bg-light);
 }
 
+/* ---------- 滚动进度条 ---------- */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 3px;
+    height: 0%;
+    background: linear-gradient(to bottom, #2563EB, #7C3AED);
+    z-index: 9999;
+    border-radius: 0 0 0 3px;
+    transition: height 0.15s linear;
+    pointer-events: none;
+}
+
 /* ---------- 页脚 ---------- */
 .footer {
     background: #0f172a;
@@ -1446,8 +1460,10 @@ a:has(.section-title):hover .section-subtitle {
 .social-link {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     padding: 8px 14px;
+    min-width: 96px;
     border-radius: 8px;
     font-size: 13px;
     color: #94a3b8;
