@@ -19,7 +19,7 @@
             </a>
             <ul class="nav-links">
                 <li class="dropdown">
-                    <a href="#products" class="dropdown-toggle">产品矩阵</a>
+                    <a href="pages/products.html" class="dropdown-toggle">产品矩阵</a>
                     <div class="dropdown-menu">
                         <a href="pages/sentinel.html">哨兵系列</a>
                         <a href="pages/skyhawk.html">天巡系列</a>
@@ -94,59 +94,51 @@
     <!-- ========== 产品矩阵 ========== -->
     <section id="products" class="products section">
         <div class="container">
-            <a href="pages/sentinel.html">
+            <a href="pages/products.html">
                 <h2 class="section-title">产品矩阵</h2>
-                <p class="section-subtitle">全方位低空安防产品体系，满足不同场景需求</p>
+                <p class="section-subtitle" style="margin-bottom: 0;">全方位低空安防产品体系，满足不同场景需求</p>
             </a>
-            
 
-            <div class="product-arch">
-                <!-- 外层：铸盾服务 -->
-                <a href="pages/forge.html" class="arch-forge" aria-label="铸盾服务">
-                    <span class="arch-forge-label-top">铸盾服务</span>
-                    <span class="arch-forge-sub">定制化低空安防解决方案</span>
-                </a>
-
-                <!-- 中间：3个产品系列 -->
-                <div class="arch-products">
-                    <a href="pages/sentinel.html" class="arch-product arch-product-left">
-                        <div class="arch-product-circle">
-                            <span class="arch-product-icon">🔭</span>
+            <div class="product-arch-v2" style="margin-top: 12px;">
+                <!-- 左侧：原架构图（3产品圆圈 + 玄盾椭圆底盘） -->
+                <div class="arch-left-classic">
+                    <div class="product-arch">
+                        <div class="arch-products">
+                            <a href="pages/sentinel.html" class="arch-product">
+                                <div class="arch-product-circle arch-circle-sentinel"><img class="arch-product-img" src="media/products/哨兵系列.png" alt="哨兵系列"></div>
+                                <h3>哨兵系列</h3><p>无人机侦测</p><p>声光电融合方案</p>
+                            </a>
+                            <a href="pages/skyhawk.html" class="arch-product">
+                                <div class="arch-product-circle arch-circle-skyhawk"><img class="arch-product-img" src="media/products/天巡系列.jpg" alt="天巡系列"></div>
+                                <h3>天巡系列</h3><p>空中察打</p><p>基于事件相机技术</p>
+                            </a>
+                            <a href="pages/halberd.html" class="arch-product">
+                                <div class="arch-product-circle arch-circle-halberd"><img class="arch-product-img" src="media/products/飞戟系列.jpg" alt="飞戟系列"></div>
+                                <h3>飞戟系列</h3><p>高机动拦截</p><p>超越人类飞手</p>
+                            </a>
                         </div>
-                        <h3>哨兵系列</h3>
-                        <p>无人机侦测</p>
-                    </a>
-                    <a href="pages/skyhawk.html" class="arch-product arch-product-center">
-                        <div class="arch-product-circle">
-                            <span class="arch-product-icon">🦅</span>
-                        </div>
-                        <h3>天巡系列</h3>
-                        <p>空中察打</p>
-                    </a>
-                    <a href="pages/halberd.html" class="arch-product arch-product-right">
-                        <div class="arch-product-circle">
-                            <span class="arch-product-icon">⚔️</span>
-                        </div>
-                        <h3>飞戟系列</h3>
-                        <p>高机动拦截</p>
-                    </a>
+                        <a href="pages/shield.html" class="arch-brain">
+                            <div class="arch-brain-platform">
+                                <img class="arch-brain-bg" src="media/products/玄盾大脑.png" alt="玄盾大脑">
+                                <div class="arch-brain-inner">
+                                    <span class="arch-brain-label">玄盾大脑</span>
+                                    <span class="arch-brain-sub">指挥决策中枢，基于大模型技术</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- 底层：玄盾大脑 -->
-                <a href="pages/shield.html" class="arch-brain">
-                    <div class="arch-brain-platform">
-                        <div class="arch-brain-inner">
-                            <svg class="arch-brain-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="26" height="18" rx="2"/>
-                                <line x1="8" y1="24" x2="24" y2="24"/>
-                                <line x1="16" y1="24" x2="16" y2="29"/>
-                                <line x1="10" y1="29" x2="22" y2="29"/>
-                                <circle cx="16" cy="10" r="3"/>
-                                <polyline points="10 16 14 13 16 15 22 10"/>
-                            </svg>
-                            <span class="arch-brain-label">玄盾大脑</span>
-                            <span class="arch-brain-sub">指挥决策中枢</span>
-                        </div>
+                <!-- 中间竖线 -->
+                <div class="arch-divider"></div>
+
+                <!-- 右侧：铸盾服务 -->
+                <a href="pages/forge.html" class="arch-right">
+                    <div class="arch-right-content">
+                        <img class="arch-right-img" src="media/products/铸盾服务.png" alt="铸盾服务">
+                        <h3>铸盾服务</h3>
+                        <p class="arch-right-tag">定制化低空安防解决方案</p>
+                        <p class="arch-right-desc">基于四大核心产品，因地施策，量身锻造专属低空防线</p>
                     </div>
                 </a>
             </div>
@@ -225,35 +217,71 @@
     </section>
 
     <!-- ========== 应用场景 ========== -->
-    <section id="applications" class="cases section">
+    <section id="applications" class="section bg-light">
         <div class="container">
             <a href="pages/applications.html">
                 <h2 class="section-title">应用场景</h2>
-                <p class="section-subtitle">要地安防 | 要人保护 | 要事保障</p>
+                <p class="section-subtitle">覆盖四大场景，适配各类低空安防需求</p>
             </a>
-            <div class="cases-grid">
-                <div class="case-card">
-                    <img src="media/case-1.jpg" alt="沿线部署">
-                    <div class="case-info">
-                        <h3>电力线铁塔</h3>
-                        <p>预警无人机入侵，保障线路安全。</p>
+
+            <!-- 4 列场景矩阵 -->
+            <div class="app-matrix">
+                <!-- 沿线预警 -->
+                <div class="app-column">
+                    <div class="app-col-header" style="--c: #2563EB; --c-light: rgba(37,99,235,0.08);">
+                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 28 L12 8 L22 16 L30 4" stroke-width="2"/><circle cx="12" cy="8" r="2"/><circle cx="30" cy="4" r="2"/></svg>
+                        <h3>沿线预警</h3>
+                    </div>
+                    <div class="app-col-scenes">
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-line"><img src="media/applications/电力线.png" alt="电力线"></div><span>电力线</span></div>
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-line"><img src="media/applications/铁路线.jpeg" alt="铁路线"></div><span>铁路线</span></div>
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-line"><img src="media/applications/石油管线.jpeg" alt="石油管线"></div><span>石油管线</span></div>
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-line"><img src="media/applications/边境线.png" alt="边境线"></div><span>边境线</span></div>
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-line"><img src="media/applications/公路线.png" alt="公路线"></div><span>公路线</span></div>
                     </div>
                 </div>
-                <div class="case-card">
-                    <img src="media/case-2.jpg" alt="要地部署">
-                    <div class="case-info">
-                        <h3>城市安防</h3>
-                        <p>保障重要场所和设施的低空安全。</p>
+                <!-- 要地安防 -->
+                <div class="app-column">
+                    <div class="app-col-header" style="--c: #059669; --c-light: rgba(5,150,105,0.08);">
+                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="24" height="20" rx="2"/><path d="M4 16h24"/><circle cx="16" cy="18" r="4"/></svg>
+                        <h3>要地安防</h3>
+                    </div>
+                    <div class="app-col-scenes">
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-site"><img src="media/applications/机场.png" alt="机场"></div><span>机场</span></div>
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-site"><img src="media/applications/油田.png" alt="油田"></div><span>油田</span></div>
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-site"><img src="media/applications/水电站.png" alt="水电站"></div><span>水电站</span></div>
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-site"><img src="media/applications/变电站.png" alt="变电站"></div><span>变电站</span></div>
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-site"><img src="media/applications/核电站.png" alt="核电站"></div><span>核电站</span></div>
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-site"><img src="media/applications/城市.png" alt="城市"></div><span>城市</span></div>
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-site"><img src="media/applications/工厂.png" alt="工厂"></div><span>工厂</span></div>
                     </div>
                 </div>
-                <div class="case-card">
-                    <img src="media/case-3.jpg" alt="移动部署">
-                    <div class="case-info">
-                        <h3>重大活动安防</h3>
-                        <p>快速定位违规飞手位置，联动现场警力处置。</p>
+                <!-- 要人保护 -->
+                <div class="app-column">
+                    <div class="app-col-header" style="--c: #D97706; --c-light: rgba(217,119,6,0.08);">
+                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="12" r="8"/><path d="M8 24c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+                        <h3>要人保护</h3>
+                    </div>
+                    <div class="app-col-scenes">
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-vip"><img src="media/applications/车队.png" alt="车队"></div><span>车队</span></div>
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-vip"><img src="media/applications/别墅.png" alt="别墅"></div><span>别墅</span></div>
+                    </div>
+                </div>
+                <!-- 要事保障 -->
+                <div class="app-column">
+                    <div class="app-col-header" style="--c: #7C3AED; --c-light: rgba(124,58,237,0.08);">
+                        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="14" r="12"/><polyline points="10 14 14 18 22 10"/><rect x="6" y="22" width="20" height="4" rx="1"/></svg>
+                        <h3>要事保障</h3>
+                    </div>
+                    <div class="app-col-scenes">
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-event"><img src="media/applications/马拉松.jpg" alt="马拉松"></div><span>马拉松</span></div>
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-event"><img src="media/applications/大型赛事.jpg" alt="大型赛事"></div><span>大型赛事</span></div>
+                        <div class="app-scene"><div class="app-scene-avatar app-scene-event"><img src="media/applications/演唱会.jpeg" alt="演唱会"></div><span>演唱会</span></div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
         </div>
     </section>
 
@@ -339,7 +367,14 @@
                             <img src="media/QinChao.jpg" alt="秦超博士">
                         </div>
                         <h4>秦超 博士</h4>
-                        <span class="about-team-role">高级合伙人</span>
+                        <span class="about-team-role">高级合伙人（技术）</span>
+                    </a>
+                    <a href="pages/about.html#team-lihy" class="about-team-card">
+                        <div class="about-team-avatar">
+                            <img src="media/李鸿远.jpg" alt="李鸿远">
+                        </div>
+                        <h4>李鸿远</h4>
+                        <span class="about-team-role">高级合伙人（商务）</span>
                     </a>
                     <a href="pages/about.html#team-wang" class="about-team-card">
                         <div class="about-team-avatar">
@@ -426,7 +461,7 @@
                     </div>
                 </div>
                 <div class="footer-col">
-                    <h4><a href="#products">产品矩阵</a></h4>
+                    <h4><a href="pages/products.html">产品矩阵</a></h4>
                     <ul>
                         <li><a href="pages/sentinel.html">哨兵系列</a></li>
                         <li><a href="pages/skyhawk.html">天巡系列</a></li>

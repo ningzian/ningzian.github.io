@@ -20,7 +20,7 @@
             </a>
             <ul class="nav-links">
                 <li class="dropdown">
-                    <a href="../index.html#products" class="dropdown-toggle">产品矩阵</a>
+                    <a href="products.html" class="dropdown-toggle">产品矩阵</a>
                     <div class="dropdown-menu">
                         <a href="sentinel.html">哨兵系列</a>
                         <a href="skyhawk.html">天巡系列</a>
@@ -89,48 +89,6 @@
         </div>
     </section>
 
-    <!-- ========== 产品体系架构图 ========== -->
-    <section class="products section" style="padding-bottom: 0;">
-        <div class="container">
-            <div class="product-arch">
-                <a href="forge.html" class="arch-forge" aria-label="铸盾服务">
-                    <span class="arch-forge-label-top">铸盾服务</span>
-                    <span class="arch-forge-sub">定制化低空安防解决方案</span>
-                </a>
-                <div class="arch-products">
-                    <a href="sentinel.html" class="arch-product">
-                        <div class="arch-product-circle"><span class="arch-product-icon">🔭</span></div>
-                        <h3>哨兵系列</h3><p>无人机侦测</p>
-                    </a>
-                    <a href="skyhawk.html" class="arch-product">
-                        <div class="arch-product-circle"><span class="arch-product-icon">🦅</span></div>
-                        <h3>天巡系列</h3><p>空中察打</p>
-                    </a>
-                    <a href="halberd.html" class="arch-product">
-                        <div class="arch-product-circle"><span class="arch-product-icon">⚔️</span></div>
-                        <h3>飞戟系列</h3><p>高机动拦截</p>
-                    </a>
-                </div>
-                <a href="shield.html" class="arch-brain">
-                    <div class="arch-brain-platform">
-                        <div class="arch-brain-inner">
-                            <svg class="arch-brain-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="26" height="18" rx="2"/>
-                                <line x1="8" y1="24" x2="24" y2="24"/>
-                                <line x1="16" y1="24" x2="16" y2="29"/>
-                                <line x1="10" y1="29" x2="22" y2="29"/>
-                                <circle cx="16" cy="10" r="3"/>
-                                <polyline points="10 16 14 13 16 15 22 10"/>
-                            </svg>
-                            <span class="arch-brain-label">玄盾大脑</span>
-                            <span class="arch-brain-sub">指挥决策中枢</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
     <!-- ========== 产品概览 ========== -->
     <section class="product-detail section">
         <div class="container">
@@ -176,9 +134,16 @@
             <div class="product-detail-grid reverse">
                 <div class="product-detail-info">
                     <span class="product-badge">VR-EC-1(S) · 电子哨兵</span>
-                    <h2>光电融合无人机监测设备</h2>
-                    <p class="product-slogan">视觉 + RID 双模融合检测，线路安全的"永不眨眼的眼睛"</p>
-                    <p>VR-EC-1(S) 是面向电力线路、管线沿线等线性场景的光电融合监测设备。融合纯视觉AI检测与 RID 无人机侦测双模能力，端侧实时处理——无威胁时不回传图像，有目标时精准识别并报警。可同时检测无人机与空飘物（气球、风筝、塑料膜等），是电力线路防外破的"电子哨兵"。</p>
+                    <h2>视觉无线电融合无人机监测设备</h2>
+                    <p>VR-EC-1(S) 融合纯视觉AI检测与 RID 无人机侦测两种技术，双重验证互为补充——国标无人机靠 RID，非国标"黑飞"靠纯视觉，不留任何漏检空间。</p>
+                    <ul class="product-features">
+                        <li>端侧实时处理：功耗 &lt; 5W</li>
+                        <li>无线电侦测实时映射至视觉画面</li>
+                        <li>视觉检测：成功率 &gt; 90%，误检率 &lt; 5%</li>
+                        <li>兼容空飘物检测：气球、风筝、塑料膜、丝带</li>
+                        <li>支持无电无网环境部署，可选配太阳能板 + 电池供电模块</li>
+                        <li>可选配 4G / 无线组网通信模块，支持多节点分布式协同</li>
+                    </ul>
                 </div>
                 <div class="product-detail-image">
                     <div class="carousel">
@@ -191,46 +156,6 @@
                         <button class="carousel-btn carousel-next" aria-label="下一张">&#8250;</button>
                         <div class="carousel-dots"></div>
                     </div>
-                </div>
-            </div>
-
-            <!-- 双模能力 -->
-            <div class="product-row" style="grid-template-columns: repeat(2, 1fr); margin-top: 48px;">
-                <div class="product-card">
-                    <h3>👁️ 纯视觉AI检测</h3>
-                    <p class="product-tag">端侧实时处理</p>
-                    <p>基于深度学习视觉算法，实时检测无人机与空飘物。最小仅需 21 个像素即可精准识别目标，误报率极低。无威胁时无需回传图像，大幅节省带宽与存储。</p>
-                    <ul class="product-features" style="grid-template-columns: 1fr; margin-top: 16px;">
-                        <li>检测成功率 &gt; 90%，有效距离 300m</li>
-                        <li>广角 70°，2000 万像素</li>
-                        <li>兼容空飘物检测：气球、风筝、塑料膜、丝带</li>
-                        <li>端侧AI推理，低功耗边缘计算</li>
-                    </ul>
-                </div>
-                <div class="product-card">
-                    <h3>📡 RID 无人机侦测</h3>
-                    <p class="product-tag">2km 覆盖</p>
-                    <p>内置 RID 侦测模块，接收 2km 以内的无人机广播信号。实时解析无人机 ID、位置、高度、速度等信息，与视觉检测互为补充——RID 提供远距离预警，视觉提供近场确认与空飘物补盲。</p>
-                    <ul class="product-features" style="grid-template-columns: 1fr; margin-top: 16px;">
-                        <li>RID 侦测距离 ≥ 2km</li>
-                        <li>支持 GB 42590-2023 国标</li>
-                        <li>无人机 ID / 位置 / 高度 / 速度实时解析</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 融合能力 -->
-            <div class="product-detail-grid" style="margin-top: 36px;">
-                <div class="product-detail-info" style="max-width: 100%;">
-                    <h2 style="font-size: 24px;">🔗 光电融合</h2>
-                    <p class="product-slogan">RID 目标映射至图像，远中近全覆盖</p>
-                    <p style="max-width: 560px;">RID 侦测到的无人机位置，实时映射到视觉画面中，在图像上标注目标身份与方位。远距离靠 RID 预警，中距离视觉确认，近距离精准识别——三区接力，不给任何威胁留死角。</p>
-                    <ul class="product-features" style="grid-template-columns: 1fr; max-width: 560px;">
-                        <li>RID 目标 → 图像实时映射标注</li>
-                        <li>远距 RID 预警 + 近距视觉确认，双重验证</li>
-                        <li>端侧融合处理，无需上传云端</li>
-                        <li>低误报：RID 过滤非无人机，视觉过滤空飘物虚警</li>
-                    </ul>
                 </div>
             </div>
 
@@ -271,90 +196,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- 核心参数 -->
-            <div class="product-row" style="grid-template-columns: repeat(3, 1fr); margin-top: 36px;">
-                <div class="product-card">
-                    <h3>视觉检测距离</h3>
-                    <p class="product-tag">300m</p>
-                    <p>有效识别距离 300m，最小 21 像素即可检出目标</p>
-                </div>
-                <div class="product-card">
-                    <h3>RID 侦测距离</h3>
-                    <p class="product-tag">≥ 2km</p>
-                    <p>覆盖 2km 半径内所有国标无人机</p>
-                </div>
-                <div class="product-card">
-                    <h3>视场角</h3>
-                    <p class="product-tag">广角 70°</p>
-                    <p>单台设备覆盖宽广视场，减少部署节点数量</p>
-                </div>
-                <div class="product-card">
-                    <h3>分辨率</h3>
-                    <p class="product-tag">2000 万像素</p>
-                    <p>高分辨率确保远距离小目标清晰可辨</p>
-                </div>
-                <div class="product-card">
-                    <h3>检测成功率</h3>
-                    <p class="product-tag">&gt; 90%</p>
-                    <p>多种复杂背景下均保持高检出率</p>
-                </div>
-                <div class="product-card">
-                    <h3>空飘物兼容</h3>
-                    <p class="product-tag">全类型</p>
-                    <p>气球、风筝、塑料膜、丝带等各类空飘物</p>
-                </div>
-            </div>
-
-            <!-- 适用场景 -->
-            <div class="product-row" style="grid-template-columns: repeat(3, 1fr); margin-top: 48px;">
-                <div class="product-card">
-                    <h3>🔌 电力线路</h3>
-                    <p class="product-tag">防外破</p>
-                    <p>铁塔架设，监测无人机与空飘物入侵输电线路。端侧处理不依赖网络，适配野外环境。</p>
-                </div>
-                <div class="product-card">
-                    <h3>🏗️ 管线沿线</h3>
-                    <p class="product-tag">线性防护</p>
-                    <p>沿油气管线、铁路等线性设施部署，自动识别沿线低空威胁，无人值守。</p>
-                </div>
-                <div class="product-card">
-                    <h3>🏛️ 固定场所</h3>
-                    <p class="product-tag">要地安防</p>
-                    <p>部署于变电站、通信基站等重要设施周边，视觉+ RID 双重保障低空安全。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== 协同产品 ========== -->
-    <section class="product-detail section bg-light">
-        <div class="container">
-            <h2 class="section-title">协同产品</h2>
-            <p class="section-subtitle">哨兵发现，天巡确认，飞戟待命，玄盾调度 — 四位一体，闭环防护</p>
-            <div class="product-row" style="grid-template-columns: repeat(3, 1fr);">
-                <a href="skyhawk.html" style="text-decoration: none; color: inherit;">
-                    <div class="product-card">
-                        <h3>天巡系列 →</h3>
-                        <p class="product-tag">空中察打</p>
-                        <p>哨兵发现目标后，天巡出动进行空中识别确认与取证，必要时实施网捕处置。</p>
-                    </div>
-                </a>
-                <a href="halberd.html" style="text-decoration: none; color: inherit;">
-                    <div class="product-card">
-                        <h3>飞戟系列 →</h3>
-                        <p class="product-tag">高机动拦截</p>
-                        <p>对高速突防目标，飞戟极速响应，精准撞击拦截，形成最后一道物理防线。</p>
-                    </div>
-                </a>
-                <a href="shield.html" style="text-decoration: none; color: inherit;">
-                    <div class="product-card">
-                        <h3>玄盾大脑 →</h3>
-                        <p class="product-tag">指挥决策</p>
-                        <p>哨兵数据汇入玄盾大脑，融合态势感知与智能决策，统一调度所有防御资源。</p>
-                    </div>
-                </a>
-            </div>
         </div>
     </section>
 
@@ -392,7 +233,7 @@
                     </div>
                 </div>
                 <div class="footer-col">
-                    <h4><a href="../index.html#products">产品矩阵</a></h4>
+                    <h4><a href="products.html">产品矩阵</a></h4>
                     <ul>
                         <li><a href="sentinel.html">哨兵系列</a></li>
                         <li><a href="skyhawk.html">天巡系列</a></li>
