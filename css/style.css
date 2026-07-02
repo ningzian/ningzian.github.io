@@ -163,6 +163,7 @@ a:has(.section-title):hover .section-subtitle {
 .logo-title {
     font-size: 20px;
     font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85), 0 2px 8px rgba(0, 0, 0, 0.7), 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .logo-subtitle {
@@ -170,6 +171,12 @@ a:has(.section-title):hover .section-subtitle {
     font-weight: 400;
     letter-spacing: 3px;
     opacity: 0.75;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65), 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+
+.navbar.scrolled .logo-title,
+.navbar.scrolled .logo-subtitle {
+    text-shadow: none;
 }
 
 .navbar.scrolled .logo {
@@ -190,10 +197,12 @@ a:has(.section-title):hover .section-subtitle {
     color: #ffffff;
     transition: color 0.2s;
     position: relative;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85), 0 2px 8px rgba(0, 0, 0, 0.7), 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .navbar.scrolled .nav-links a {
     color: var(--color-text);
+    text-shadow: none;
 }
 
 .nav-links a::after {
@@ -357,10 +366,81 @@ a:has(.section-title):hover .section-subtitle {
     object-fit: cover;
 }
 
+/* ---------- Hero 视频轮播 ---------- */
+.hero-slider {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: #000;
+    overflow: hidden;
+}
+
+.hero-slides {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease;
+}
+
+.hero-slides video {
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.hero-slider-btn:hover { background: rgba(255, 255, 255, 0.45); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+.hero-slider-prev { left: 24px; }
+.hero-slider-next { right: 24px; }
+
+.hero-slider-dots {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 4;
+}
+
+.hero-slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.hero-slider-dot.active {
+    background: #fff;
+    border-color: #fff;
+}
+
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    pointer-events: none;
 }
 
 .hero-content {
@@ -376,12 +456,14 @@ a:has(.section-title):hover .section-subtitle {
     font-weight: 700;
     margin-bottom: 16px;
     letter-spacing: 2px;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6), 0 4px 32px rgba(0, 0, 0, 0.4);
 }
 
 .hero-content p {
     font-size: 20px;
     margin-bottom: 36px;
     opacity: 0.9;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5), 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .btn-primary {
@@ -716,8 +798,8 @@ a:has(.section-title):hover .section-subtitle {
     letter-spacing: 1px;
 }
 
-/* 四项技术 */
-.tech-items {
+/* 四项技术卡片（首页+核心技术页共用） */
+.tech-cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
@@ -725,7 +807,7 @@ a:has(.section-title):hover .section-subtitle {
     margin: 0 auto;
 }
 
-.tech-item {
+.tech-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -739,13 +821,13 @@ a:has(.section-title):hover .section-subtitle {
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
 }
 
-.tech-item:hover {
+.tech-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     border-color: var(--color-primary);
 }
 
-.tech-item-icon {
+.tech-card-icon {
     width: 56px;
     height: 56px;
     border-radius: 14px;
@@ -758,18 +840,18 @@ a:has(.section-title):hover .section-subtitle {
     transition: background 0.3s;
 }
 
-.tech-item:hover .tech-item-icon {
+.tech-card:hover .tech-card-icon {
     background: rgba(37, 99, 235, 0.12);
 }
 
-.tech-item h3 {
+.tech-card h3 {
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 8px;
     color: var(--color-text);
 }
 
-.tech-item p {
+.tech-card p {
     font-size: 13px;
     color: var(--color-text-light);
     line-height: 1.6;
@@ -1616,7 +1698,7 @@ a:has(.section-title):hover .section-subtitle {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .tech-items {
+    .tech-cards {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -1862,7 +1944,7 @@ a:has(.section-title):hover .section-subtitle {
         font-size: 11px;
     }
 
-    .tech-items {
+    .tech-cards {
         grid-template-columns: repeat(2, 1fr);
     }
 }
@@ -1880,7 +1962,7 @@ a:has(.section-title):hover .section-subtitle {
         grid-template-columns: 1fr;
     }
 
-    .tech-items {
+    .tech-cards {
         grid-template-columns: 1fr;
     }
 

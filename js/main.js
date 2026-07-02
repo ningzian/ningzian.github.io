@@ -61,13 +61,69 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // ----- Hero 视频轮播 -----
+    (function() {
+        var slider = document.querySelector('.hero-slider');
+        if (!slider) return;
+        var slides = slider.querySelector('.hero-slides');
+        var dotsCtn = slider.querySelector('.hero-slider-dots');
+        var prevBtn = slider.querySelector('.hero-slider-prev');
+        var nextBtn = slider.querySelector('.hero-slider-next');
+        var videos = slides.querySelectorAll('video');
+        var total = videos.length;
+        var idx = 0;
+
+        // Create dots
+        for (var i = 0; i < total; i++) {
+            var dot = document.createElement('span');
+            dot.className = 'hero-slider-dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', (function(n) {
+                return function() { go(n); };
+            })(i));
+            dotsCtn.appendChild(dot);
+        }
+        var dots = dotsCtn.querySelectorAll('.hero-slider-dot');
+
+        function go(n) {
+            // Pause current video and reset it
+            videos[idx].pause();
+            videos[idx].currentTime = 0;
+            idx = n;
+            slides.style.transform = 'translateX(-' + (idx * 100) + 'vw)';
+            dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+            // Start playing new video from beginning
+            videos[idx].currentTime = 0;
+            videos[idx].play();
+        }
+
+        function next() { go((idx + 1) % total); }
+        function prev() { go((idx - 1 + total) % total); }
+
+        prevBtn.addEventListener('click', function() { prev(); });
+        nextBtn.addEventListener('click', function() { next(); });
+
+        // Auto-advance when video ends
+        videos.forEach(function(v) {
+            v.addEventListener('ended', function() { next(); });
+        });
+
+        // Touch
+        var startX = 0;
+        slides.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; });
+        slides.addEventListener('touchend', function(e) {
+            if (Math.abs(startX - e.changedTouches[0].clientX) > 40) {
+                (startX > e.changedTouches[0].clientX) ? next() : prev();
+            }
+        });
+    })();
+
     // ----- 图片轮播 -----
     document.querySelectorAll('.carousel').forEach(function (carousel) {
         var track = carousel.querySelector('.carousel-track');
         var dotsContainer = carousel.querySelector('.carousel-dots');
         var prevBtn = carousel.querySelector('.carousel-prev');
         var nextBtn = carousel.querySelector('.carousel-next');
-        var slides = track.querySelectorAll('img');
+        var slides = track.querySelectorAll('img, video');
         var totalSlides = slides.length;
         var currentIndex = 0;
         var autoplayTimer;
